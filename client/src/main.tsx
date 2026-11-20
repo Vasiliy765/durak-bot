@@ -1,3 +1,10 @@
+const API_BASE = "https://mistral.run";
+const origFetch = globalThis.fetch.bind(globalThis);
+globalThis.fetch = (input: RequestInfo | URL, init?: RequestInit) => {
+  if (typeof input === "string" && input.startsWith("/api")) input = API_BASE + input;
+  else if (input instanceof Request && new URL(input.url).pathname.startsWith("/api")) input = new Request(API_BASE + new URL(input.url).pathname + new URL(input.url).search, input);
+  return origFetch(input, { ...init, credentials: "include" });
+};
 import { trpc } from "@/lib/trpc";
 import { COOKIE_NAME, UNAUTHED_ERR_MSG } from '@shared/const';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

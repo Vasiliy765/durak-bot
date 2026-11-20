@@ -5,6 +5,16 @@ import { registerMiniAppRoutes } from "../game/miniAppRoutes";
 import { rollbackBuggedCrystals } from "../game/economy";
 
 const app = express();
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  res.setHeader("Access-Control-Allow-Origin", origin && origin.endsWith(".github.io") ? origin : "https://github.io");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+  next();
+});
+
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => {
