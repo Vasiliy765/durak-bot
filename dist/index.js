@@ -196,8 +196,24 @@ async function handleSuccessfulPayment(message) {
   }
 }
 
+// server/game/userStore.ts
+var users = /* @__PURE__ */ new Map();
+function getOrCreateUser(userId) {
+  if (!users.has(userId)) {
+    users.set(userId, {
+      coins: 500,
+      crystals: 10,
+      lastSalary: 0,
+      lastDaily: 0,
+      streak: 1
+    });
+  }
+  return users.get(userId);
+}
+
 // server/game/telegramBot.ts
 var FIVE_MINUTES_SEC = 5 * 60;
+var ONE_HOUR_MS = 60 * 60 * 1e3;
 var WEBAPP_URL = process.env.WEBAPP_URL ? process.env.WEBAPP_URL : "https://mistral.run";
 async function processTelegramUpdate(update) {
   if (update.pre_checkout_query) {
@@ -208,6 +224,7 @@ async function processTelegramUpdate(update) {
   if (!msg) return;
   const chatId = msg.chat.id;
   const userId = msg.from ? msg.from.id : void 0;
+  const firstName = msg.from && msg.from.first_name ? msg.from.first_name : "\u0413\u0440\u0430\u0432\u0435\u0446\u044C";
   const threadId = msg.message_thread_id;
   const text = (msg.text ? msg.text : "").trim();
   const lowerText = text.toLowerCase();
@@ -248,18 +265,44 @@ async function processTelegramUpdate(update) {
     });
     return;
   }
-  if (["\u0431\u0430\u043B\u0430\u043D\u0441", "/balance"].includes(lowerText) || lowerText.startsWith("/balance@")) {
-    await sendBotMessage(chatId, "\u{1F48E} \u041F\u0435\u0440\u0435\u0432\u0456\u0440\u0438\u0442\u0438 \u0442\u0430 \u043F\u043E\u043F\u043E\u0432\u043D\u0438\u0442\u0438 \u0431\u0430\u043B\u0430\u043D\u0441 \u043C\u043E\u0436\u043D\u0430 \u0443 Mini App.", {
-      message_thread_id: threadId,
-      autoDeleteSeconds: FIVE_MINUTES_SEC
-    });
+  if (userId && (["\u0431\u0430\u043B\u0430\u043D\u0441", "/balance"].includes(lowerText) || lowerText.startsWith("/balance@"))) {
+    const u = getOrCreateUser(userId);
+    await sendBotMessage(
+      chatId,
+      "\u{1F464} <b>" + firstName + "</b>, \u0442\u0432\u0456\u0439 \u0431\u0430\u043B\u0430\u043D\u0441:\n\u{1FA99} \u041C\u043E\u043D\u0435\u0442\u0438: <b>" + u.coins + "</b>\n\u{1F48E} \u041A\u0440\u0438\u0441\u0442\u0430\u043B\u0438: <b>" + u.crystals + "</b>",
+      {
+        message_thread_id: threadId,
+        autoDeleteSeconds: FIVE_MINUTES_SEC
+      }
+    );
     return;
   }
-  if (["\u0437\u043F", "\u0437\u0430\u0440\u043F\u043B\u0430\u0442\u0430", "/zp"].includes(lowerText) || lowerText.startsWith("/zp@")) {
-    await sendBotMessage(chatId, "\u{1F4B0} \u0429\u043E\u0434\u0435\u043D\u043D\u0430 \u043D\u0430\u0433\u043E\u0440\u043E\u0434\u0430 (\u0417\u041F) \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430 \u0443 Mini App.", {
-      message_thread_id: threadId,
-      autoDeleteSeconds: FIVE_MINUTES_SEC
-    });
+  if (userId && (["\u0437\u043F", "\u0437\u0430\u0440\u043F\u043B\u0430\u0442\u0430", "/zp"].includes(lowerText) || lowerText.startsWith("/zp@"))) {
+    const u = getOrCreateUser(userId);
+    const now = Date.now();
+    if (now - u.lastSalary < ONE_HOUR_MS) {
+      const minsLeft = Math.ceil((u.lastSalary + ONE_HOUR_MS - now) / 6e4);
+      await sendBotMessage(
+        chatId,
+        "\u23F3 <b>" + firstName + "</b>, \u0442\u0438 \u0432\u0436\u0435 \u043E\u0442\u0440\u0438\u043C\u0443\u0432\u0430\u0432 \u0417\u041F.\n\u041D\u0430\u0441\u0442\u0443\u043F\u043D\u0430 \u0437\u0430\u0440\u043F\u043B\u0430\u0442\u0430 \u0447\u0435\u0440\u0435\u0437 <b>" + minsLeft + " \u0445\u0432</b>.",
+        {
+          message_thread_id: threadId,
+          autoDeleteSeconds: FIVE_MINUTES_SEC
+        }
+      );
+      return;
+    }
+    const reward = 150;
+    u.lastSalary = now;
+    u.coins += reward;
+    await sendBotMessage(
+      chatId,
+      "\u{1F4B0} <b>" + firstName + "</b>, \u0442\u0438 \u043E\u0442\u0440\u0438\u043C\u0430\u0432 \u0437\u0430\u0440\u043F\u043B\u0430\u0442\u0443 <b>+" + reward + " \u{1FA99}</b>!\n\u041F\u043E\u0442\u043E\u0447\u043D\u0438\u0439 \u0431\u0430\u043B\u0430\u043D\u0441: <b>" + u.coins + " \u{1FA99}</b> | <b>" + u.crystals + " \u{1F48E}</b>",
+      {
+        message_thread_id: threadId,
+        autoDeleteSeconds: FIVE_MINUTES_SEC
+      }
+    );
     return;
   }
 }

@@ -1,8 +1,10 @@
 import { sendBotMessage, setBotsTopicThread } from "./telegramApi";
 import { enforceNonPlayerMessageDelete } from "./groupPermissions";
 import { handlePreCheckoutQuery, handleSuccessfulPayment, rollbackBuggedCrystals } from "./economy";
+import { getOrCreateUser } from "./userStore";
 
 const FIVE_MINUTES_SEC = 5 * 60;
+const ONE_HOUR_MS = 60 * 60 * 1000;
 const WEBAPP_URL = process.env.WEBAPP_URL ? process.env.WEBAPP_URL : "https://mistral.run";
 
 export async function processTelegramUpdate(update: any) {
@@ -16,6 +18,7 @@ export async function processTelegramUpdate(update: any) {
 
   const chatId: number = msg.chat.id;
   const userId: number | undefined = msg.from ? msg.from.id : undefined;
+  const firstName: string = msg.from && msg.from.first_name ? msg.from.first_name : "Гравець";
   const threadId: number | undefined = msg.message_thread_id;
   const text: string = (msg.text ? msg.text : "").trim();
   const lowerText = text.toLowerCase();
@@ -63,19 +66,48 @@ export async function processTelegramUpdate(update: any) {
     return;
   }
 
-  if (["баланс", "/balance"].includes(lowerText) || lowerText.startsWith("/balance@")) {
-    await sendBotMessage(chatId, "💎 Перевірити та поповнити баланс можна у Mini App.", {
-      message_thread_id: threadId,
-      autoDeleteSeconds: FIVE_MINUTES_SEC,
-    });
+  // Реальний баланс у чаті (видаляється через 5 хв)
+  if (userId && (["баланс", "/balance"].includes(lowerText) || lowerText.startsWith("/balance@"))) {
+    const u = getOrCreateUser(userId);
+    await sendBotMessage(
+      chatId,
+      "👤 <b>" + firstName + "</b>, твій баланс:\n🪙 Монети: <b>" + u.coins + "</b>\n💎 Кристали: <b>" + u.crystals + "</b>",
+      {
+        message_thread_id: threadId,
+        autoDeleteSeconds: FIVE_MINUTES_SEC,
+      }
+    );
     return;
   }
 
-  if (["зп", "зарплата", "/zp"].includes(lowerText) || lowerText.startsWith("/zp@")) {
-    await sendBotMessage(chatId, "💰 Щоденна нагорода (ЗП) доступна у Mini App.", {
-      message_thread_id: threadId,
-      autoDeleteSeconds: FIVE_MINUTES_SEC,
-    });
+  // Реальна видача ЗП прямо в чаті (раз на годину, видаляється через 5 хв)
+  if (userId && (["зп", "зарплата", "/zp"].includes(lowerText) || lowerText.startsWith("/zp@"))) {
+    const u = getOrCreateUser(userId);
+    const now = Date.now();
+    if (now - u.lastSalary < ONE_HOUR_MS) {
+      const minsLeft = Math.ceil((u.lastSalary + ONE_HOUR_MS - now) / 60000);
+      await sendBotMessage(
+        chatId,
+        "⏳ <b>" + firstName + "</b>, ти вже отримував ЗП.\nНаступна зарплата через <b>" + minsLeft + " хв</b>.",
+        {
+          message_thread_id: threadId,
+          autoDeleteSeconds: FIVE_MINUTES_SEC,
+        }
+      );
+      return;
+    }
+
+    const reward = 150;
+    u.lastSalary = now;
+    u.coins += reward;
+    await sendBotMessage(
+      chatId,
+      "💰 <b>" + firstName + "</b>, ти отримав зарплату <b>+" + reward + " 🪙</b>!\nПоточний баланс: <b>" + u.coins + " 🪙</b> | <b>" + u.crystals + " 💎</b>",
+      {
+        message_thread_id: threadId,
+        autoDeleteSeconds: FIVE_MINUTES_SEC,
+      }
+    );
     return;
   }
 }
