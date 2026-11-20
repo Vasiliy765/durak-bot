@@ -1,6 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { callTelegram } from "./telegramApi";
 import { CRYSTAL_PACKAGES } from "./economy";
+import { getOrCreateUser } from "./userStore";
 
 interface TgUser {
   id: number;
@@ -29,19 +30,12 @@ function parseTelegramUser(req: Request): TgUser {
   return { id: 1000001, first_name: "Гравець", username: "player" };
 }
 
-const userState = new Map<number, { coins: number; crystals: number; lastSalary: number; lastDaily: number; streak: number }>();
-
-function getUserState(id: number) {
-  if (!userState.has(id)) {
-    userState.set(id, { coins: 500, crystals: 10, lastSalary: 0, lastDaily: 0, streak: 1 });
-  }
-  return userState.get(id)!;
-}
+const tablesStore: any[] = [];
 
 export function registerMiniAppRoutes(app: Express) {
   app.get("/api/game/profile", (req: Request, res: Response) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     res.json({
       profile: {
         id: String(user.id),
@@ -61,7 +55,7 @@ export function registerMiniAppRoutes(app: Express) {
 
   app.get("/api/game/economy/overview", (req: Request, res: Response) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     res.json({
       balance: st.coins,
       crystals: st.crystals,
@@ -74,7 +68,7 @@ export function registerMiniAppRoutes(app: Express) {
 
   app.post("/api/game/economy/salary", (req: Request, res: Response) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     const now = Date.now();
     if (now - st.lastSalary < 3600000) {
       return res.json({ claimed: false, amount: 0, balance: st.coins, remainingMs: st.lastSalary + 3600000 - now });
@@ -86,7 +80,7 @@ export function registerMiniAppRoutes(app: Express) {
 
   app.post("/api/game/economy/daily", (req: Request, res: Response) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     const now = Date.now();
     if (now - st.lastDaily < 86400000) {
       return res.json({ claimed: false, amount: 0, bonusAmount: 0, balance: st.coins, streak: st.streak, streakBonus: 0, remainingMs: st.lastDaily + 86400000 - now });
@@ -117,11 +111,17 @@ export function registerMiniAppRoutes(app: Express) {
 
   app.get("/api/game-center/tables", (req: Request, res: Response) => {
     const user = parseTelegramUser(req);
-    res.json({ tables: [], myPlayerId: String(user.id) });
+    res.json({ tables: tablesStore, myPlayerId: String(user.id) });
   });
 
   app.get("/api/game-center/leaderboard", (_req: Request, res: Response) => res.json({ players: [] }));
   app.get("/api/game/economy/shop", (_req: Request, res: Response) => res.json({ items: [] }));
   app.get("/api/game/economy/inventory", (_req: Request, res: Response) => res.json({ items: [] }));
   app.get("/api/game/economy/top", (_req: Request, res: Response) => res.json({ players: [] }));
+
+  // Універсальний обробник для інших запитів ігрового центру, щоб не вибивало помилку авторизації
+  app.all("/api/game-center/*", (req: Request, res: Response) => {
+    const user = parseTelegramUser(req);
+    res.json({ ok: true, tables: tablesStore, myPlayerId: String(user.id), players: [] });
+  });
 }

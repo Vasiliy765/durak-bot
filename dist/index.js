@@ -328,17 +328,11 @@ function parseTelegramUser(req) {
   }
   return { id: 1000001, first_name: "\u0413\u0440\u0430\u0432\u0435\u0446\u044C", username: "player" };
 }
-var userState = /* @__PURE__ */ new Map();
-function getUserState(id) {
-  if (!userState.has(id)) {
-    userState.set(id, { coins: 500, crystals: 10, lastSalary: 0, lastDaily: 0, streak: 1 });
-  }
-  return userState.get(id);
-}
+var tablesStore = [];
 function registerMiniAppRoutes(app2) {
   app2.get("/api/game/profile", (req, res) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     res.json({
       profile: {
         id: String(user.id),
@@ -357,7 +351,7 @@ function registerMiniAppRoutes(app2) {
   });
   app2.get("/api/game/economy/overview", (req, res) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     res.json({
       balance: st.coins,
       crystals: st.crystals,
@@ -369,7 +363,7 @@ function registerMiniAppRoutes(app2) {
   });
   app2.post("/api/game/economy/salary", (req, res) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     const now = Date.now();
     if (now - st.lastSalary < 36e5) {
       return res.json({ claimed: false, amount: 0, balance: st.coins, remainingMs: st.lastSalary + 36e5 - now });
@@ -380,7 +374,7 @@ function registerMiniAppRoutes(app2) {
   });
   app2.post("/api/game/economy/daily", (req, res) => {
     const user = parseTelegramUser(req);
-    const st = getUserState(user.id);
+    const st = getOrCreateUser(user.id);
     const now = Date.now();
     if (now - st.lastDaily < 864e5) {
       return res.json({ claimed: false, amount: 0, bonusAmount: 0, balance: st.coins, streak: st.streak, streakBonus: 0, remainingMs: st.lastDaily + 864e5 - now });
@@ -407,12 +401,16 @@ function registerMiniAppRoutes(app2) {
   });
   app2.get("/api/game-center/tables", (req, res) => {
     const user = parseTelegramUser(req);
-    res.json({ tables: [], myPlayerId: String(user.id) });
+    res.json({ tables: tablesStore, myPlayerId: String(user.id) });
   });
   app2.get("/api/game-center/leaderboard", (_req, res) => res.json({ players: [] }));
   app2.get("/api/game/economy/shop", (_req, res) => res.json({ items: [] }));
   app2.get("/api/game/economy/inventory", (_req, res) => res.json({ items: [] }));
   app2.get("/api/game/economy/top", (_req, res) => res.json({ players: [] }));
+  app2.all("/api/game-center/*", (req, res) => {
+    const user = parseTelegramUser(req);
+    res.json({ ok: true, tables: tablesStore, myPlayerId: String(user.id), players: [] });
+  });
 }
 
 // server/_core/index.ts
