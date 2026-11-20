@@ -15,14 +15,14 @@ export function getBotsTopicThread(chatId: number): number | undefined {
 }
 
 export async function callTelegram<T = any>(method: string, payload: Record<string, any>): Promise<T> {
-  const res = await fetch(${API_BASE}/${method}, {
+  const res = await fetch(API_BASE + "/" + method, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   const data = await res.json();
   if (!data.ok) {
-    console.error([Telegram API ${method}] Error:, data.description);
+    console.error("[Telegram API " + method + "] Error:", data.description);
   }
   return data;
 }
@@ -34,9 +34,6 @@ export async function deleteChatMessage(chatId: number, messageId: number) {
   });
 }
 
-/**
- * Відправка повідомлення у гілку (тему) + опціональне автовидалення через N секунд (за замовчуванням 5 хв для сервісних відповідей)
- */
 export async function sendBotMessage(
   chatId: number,
   text: string,

@@ -24,12 +24,10 @@ export async function addCrystalsToUser(userId: number, amount: number): Promise
 
   if (db) {
     try {
-      // Оновлюємо кристали у таблиці users
       await db.execute(
         "UPDATE users SET crystals = COALESCE(crystals, 0) + ? WHERE telegramId = ?",
         [amount, tgId]
       );
-      // Оновлюємо кристали у дзеркальній таблиці гаманців spy_wallets (якщо є)
       await db.execute(
         "UPDATE spy_wallets SET crystals = COALESCE(crystals, 0) + ? WHERE telegramId = ?",
         [amount, tgId]
@@ -39,7 +37,7 @@ export async function addCrystalsToUser(userId: number, amount: number): Promise
         [tgId]
       );
       if (rows && rows.length > 0) {
-        return Number(rows[0].crystals);
+        return Number(rows.crystals);
       }
     } catch (err) {
       console.error("[Economy MySQL Error]:", err);
@@ -75,7 +73,7 @@ export async function handleSuccessfulPayment(message: any) {
     if (chatId) {
       await sendBotMessage(
         chatId,
-        💎 Оплата успішна! Нараховано <b>+${crystalsAmount} кристалів</b>.\nПоточний баланс: <b>${newBalance} 💎</b>,
+        "💎 Оплата успішна! Нараховано <b>+" + crystalsAmount + " кристалів</b>.\nПоточний баланс: <b>" + newBalance + " 💎</b>",
         { message_thread_id: message.message_thread_id }
       );
     }
