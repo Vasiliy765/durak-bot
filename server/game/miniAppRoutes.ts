@@ -30,7 +30,14 @@ function parseTelegramUser(req: Request): TgUser {
   return { id: 1000001, first_name: "Гравець", username: "player" };
 }
 
-const tablesStore: any[] = [];
+const tablesStore = new Array<any>();
+const defaultBets = Array.of(10, 50, 100, 500);
+
+const defaultGames = Array.of(
+  { id: "durak", gameType: "durak", name: "Дурак", title: "Дурак", minPlayers: 2, maxPlayers: 4, bets: defaultBets },
+  { id: "battleship", gameType: "battleship", name: "Морський бій", title: "Морський бій", minPlayers: 2, maxPlayers: 2, bets: defaultBets },
+  { id: "tictactoe", gameType: "tictactoe", name: "Хрестики-нулики", title: "Хрестики-нулики", minPlayers: 2, maxPlayers: 2, bets: defaultBets }
+);
 
 export function registerMiniAppRoutes(app: Express) {
   app.get("/api/game/profile", (req: Request, res: Response) => {
@@ -100,7 +107,7 @@ export function registerMiniAppRoutes(app: Express) {
       description: "Поповнення балансу кристалів у грі",
       payload: packageId,
       currency: "XTR",
-      prices: [{ label: crystals + " 💎", amount: starsPrice }],
+      prices: Array.of({ label: crystals + " 💎", amount: starsPrice }),
     });
 
     if (!tgRes || !tgRes.ok) {
@@ -109,19 +116,48 @@ export function registerMiniAppRoutes(app: Express) {
     res.json({ invoiceUrl: tgRes.result, orderId: packageId + "_" + Date.now() });
   });
 
+  app.get("/api/game-center/config", (_req: Request, res: Response) => {
+    res.json({
+      games: defaultGames,
+      modes: defaultGames,
+      betOptions: defaultBets,
+      bets: defaultBets,
+      defaultBet: 50,
+    });
+  });
+
   app.get("/api/game-center/tables", (req: Request, res: Response) => {
     const user = parseTelegramUser(req);
     res.json({ tables: tablesStore, myPlayerId: String(user.id) });
   });
 
-  app.get("/api/game-center/leaderboard", (_req: Request, res: Response) => res.json({ players: [] }));
-  app.get("/api/game/economy/shop", (_req: Request, res: Response) => res.json({ items: [] }));
-  app.get("/api/game/economy/inventory", (_req: Request, res: Response) => res.json({ items: [] }));
-  app.get("/api/game/economy/top", (_req: Request, res: Response) => res.json({ players: [] }));
+  app.get("/api/game-center/tables/mine", (req: Request, res: Response) => {
+    const user = parseTelegramUser(req);
+    res.json({ tables: new Array(), myPlayerId: String(user.id) });
+  });
 
-  // Універсальний обробник для інших запитів ігрового центру, щоб не вибивало помилку авторизації
+  app.get("/api/game-center/tables/active", (req: Request, res: Response) => {
+    const user = parseTelegramUser(req);
+    res.json({ tables: tablesStore, myPlayerId: String(user.id) });
+  });
+
+  app.get("/api/game-center/leaderboard", (_req: Request, res: Response) => res.json({ players: new Array() }));
+  app.get("/api/game/economy/shop", (_req: Request, res: Response) => res.json({ items: new Array() }));
+  app.get("/api/game/economy/inventory", (_req: Request, res: Response) => res.json({ items: new Array() }));
+  app.get("/api/game/economy/top", (_req: Request, res: Response) => res.json({ players: new Array() }));
+
   app.all("/api/game-center/*", (req: Request, res: Response) => {
     const user = parseTelegramUser(req);
-    res.json({ ok: true, tables: tablesStore, myPlayerId: String(user.id), players: [] });
+    res.json({
+      ok: true,
+      games: defaultGames,
+      modes: defaultGames,
+      betOptions: defaultBets,
+      bets: defaultBets,
+      tables: tablesStore,
+      myPlayerId: String(user.id),
+      players: new Array(),
+      items: new Array(),
+    });
   });
-}
+      }
