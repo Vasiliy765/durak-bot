@@ -70,7 +70,9 @@ async function enforceNonPlayerMessageDelete(chatId, userId, messageId) {
 import mysql from "mysql2/promise";
 var CRYSTAL_PACKAGES = {
   crystals_50: 50,
+  crystals_100: 100,
   crystals_150: 150,
+  crystals_300: 300,
   crystals_500: 500,
   crystals_1200: 1200
 };
@@ -106,9 +108,59 @@ async function addCrystalsToUser(userId, amount) {
       console.error("[Economy MySQL Error]:", err);
     }
   }
-  const updated = (memoryBalances.get(userId) || 0) + amount;
+  const current = memoryBalances.get(userId) ? memoryBalances.get(userId) : 0;
+  const updated = current + amount;
   memoryBalances.set(userId, updated);
   return updated;
+}
+async function rollbackBuggedCrystals() {
+  const db = getPool();
+  if (!db) {
+    memoryBalances.clear();
+    return "\u2139\uFE0F \u0411\u0430\u0437\u0430 MySQL (DATABASE_URL) \u043D\u0435 \u043F\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0430 \u2014 \u0442\u0438\u043C\u0447\u0430\u0441\u043E\u0432\u0430 \u043F\u0430\u043C'\u044F\u0442\u044C \u0431\u0430\u043B\u0430\u043D\u0441\u0456\u0432 \u043F\u043E\u0432\u043D\u0456\u0441\u0442\u044E \u043E\u0447\u0438\u0449\u0435\u043D\u0430.";
+  }
+  const reportLines = [];
+  try {
+    const [badUsers] = await db.execute(
+      "SELECT telegramId, crystals FROM users WHERE crystals >= 100000"
+    );
+    for (const row of badUsers) {
+      const tgId = String(row.telegramId);
+      const currentCrystals = BigInt(row.crystals);
+      let legitimateCrystals = 0;
+      try {
+        const [paidRows] = await db.execute(
+          "SELECT COALESCE(SUM(crystals), 0) AS totalPaid FROM spy_star_orders WHERE telegramId = ? AND status = 'paid'",
+          [tgId]
+        );
+        if (paidRows && paidRows.length > 0) {
+          legitimateCrystals = Number(paidRows.totalPaid);
+        }
+      } catch {
+      }
+      const deducted = currentCrystals - BigInt(legitimateCrystals);
+      await db.execute("UPDATE users SET crystals = ? WHERE telegramId = ?", [legitimateCrystals, tgId]);
+      await db.execute("UPDATE spy_wallets SET crystals = ? WHERE telegramId = ?", [legitimateCrystals, tgId]);
+      reportLines.push(
+        "\u2022 ID " + tgId + ": \u0441\u043F\u0438\u0441\u0430\u043D\u043E -" + deducted.toString() + " \u{1F48E} (\u0437\u0430\u043B\u0438\u0448\u0435\u043D\u043E \u0440\u0435\u0430\u043B\u044C\u043D\u0438\u0445 \u043F\u043E\u043A\u0443\u043F\u043E\u043A: " + legitimateCrystals + " \u{1F48E})"
+      );
+    }
+    const [badWallets] = await db.execute(
+      "SELECT telegramId, crystals FROM spy_wallets WHERE crystals >= 100000"
+    );
+    for (const w of badWallets) {
+      const tgId = String(w.telegramId);
+      await db.execute("UPDATE spy_wallets SET crystals = 0 WHERE telegramId = ?", [tgId]);
+      reportLines.push("\u2022 \u0413\u0430\u043C\u0430\u043D\u0435\u0446\u044C ID " + tgId + ": \u0441\u043F\u0438\u0441\u0430\u043D\u043E -" + String(w.crystals) + " \u{1F48E}");
+    }
+  } catch (err) {
+    console.error("[Rollback Error]:", err);
+    return "\u274C \u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u0432\u0456\u0440\u0446\u0456 \u0431\u0430\u0437\u0438: " + String(err);
+  }
+  if (reportLines.length === 0) {
+    return "\u2705 \u041D\u0430\u043A\u0440\u0443\u0447\u0435\u043D\u0438\u0445 \u0431\u0430\u043B\u0430\u043D\u0441\u0456\u0432 \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E \u2014 \u0443\u0441\u0456 \u043A\u0440\u0438\u0441\u0442\u0430\u043B\u0438 \u0432\u0436\u0435 \u0441\u043F\u0438\u0441\u0430\u043D\u0456 \u0430\u0431\u043E \u0432 \u043C\u0435\u0436\u0430\u0445 \u0440\u0435\u0430\u043B\u044C\u043D\u0438\u0445 \u043F\u043E\u043A\u0443\u043F\u043E\u043A.";
+  }
+  return "\u{1F9F9} <b>\u0417\u0432\u0456\u0442 \u043F\u0440\u043E \u0441\u043F\u0438\u0441\u0430\u043D\u043D\u044F \u043F\u043E\u043C\u0438\u043B\u043A\u043E\u0432\u0438\u0445 \u043A\u0440\u0438\u0441\u0442\u0430\u043B\u0456\u0432:</b>\n" + reportLines.join("\n");
 }
 async function handlePreCheckoutQuery(query) {
   await callTelegram("answerPreCheckoutQuery", {
@@ -117,13 +169,22 @@ async function handlePreCheckoutQuery(query) {
   });
 }
 async function handleSuccessfulPayment(message) {
-  const userId = message.from?.id;
-  const chatId = message.chat?.id;
+  const userId = message.from ? message.from.id : void 0;
+  const chatId = message.chat ? message.chat.id : void 0;
   const payment = message.successful_payment;
-  if (!userId || !payment) return;
-  const payload = payment.invoice_payload || "";
-  const crystalsAmount = CRYSTAL_PACKAGES[payload] || Number(payload.replace(/[^0-9]/g, "")) || 0;
-  if (crystalsAmount > 0) {
+  if (!userId) return;
+  if (!payment) return;
+  const payload = String(payment.invoice_payload ? payment.invoice_payload : "");
+  let crystalsAmount = 0;
+  if (CRYSTAL_PACKAGES[payload]) {
+    crystalsAmount = CRYSTAL_PACKAGES[payload];
+  } else {
+    const match = payload.match(/crystals[_:](\d{1,5})/i);
+    if (match) {
+      crystalsAmount = Number(match);
+    }
+  }
+  if (crystalsAmount > 0 && crystalsAmount <= 5e4) {
     const newBalance = await addCrystalsToUser(userId, crystalsAmount);
     if (chatId) {
       await sendBotMessage(
@@ -137,6 +198,7 @@ async function handleSuccessfulPayment(message) {
 
 // server/game/telegramBot.ts
 var FIVE_MINUTES_SEC = 5 * 60;
+var WEBAPP_URL = process.env.WEBAPP_URL ? process.env.WEBAPP_URL : "https://mistral.run";
 async function processTelegramUpdate(update) {
   if (update.pre_checkout_query) {
     await handlePreCheckoutQuery(update.pre_checkout_query);
@@ -145,9 +207,9 @@ async function processTelegramUpdate(update) {
   const msg = update.message;
   if (!msg) return;
   const chatId = msg.chat.id;
-  const userId = msg.from?.id;
+  const userId = msg.from ? msg.from.id : void 0;
   const threadId = msg.message_thread_id;
-  const text = (msg.text || "").trim();
+  const text = (msg.text ? msg.text : "").trim();
   const lowerText = text.toLowerCase();
   if (msg.successful_payment) {
     await handleSuccessfulPayment(msg);
@@ -159,6 +221,24 @@ async function processTelegramUpdate(update) {
   }
   if (threadId && text.startsWith("/")) {
     setBotsTopicThread(chatId, threadId);
+  }
+  if (lowerText.startsWith("/rollback_crystals")) {
+    const report = await rollbackBuggedCrystals();
+    await sendBotMessage(chatId, report, { message_thread_id: threadId });
+    return;
+  }
+  if (lowerText.startsWith("/start") || lowerText.startsWith("/play")) {
+    await sendBotMessage(
+      chatId,
+      "\u{1F575}\uFE0F\u200D\u2642\uFE0F <b>\u0406\u0433\u0440\u043E\u0432\u0438\u0439 \u0446\u0435\u043D\u0442\u0440 \u0433\u043E\u0442\u043E\u0432\u0438\u0439!</b>\n\u041D\u0430\u0442\u0438\u0441\u043D\u0438 \u043A\u043D\u043E\u043F\u043A\u0443 \u043D\u0438\u0436\u0447\u0435, \u0449\u043E\u0431 \u0432\u0456\u0434\u043A\u0440\u0438\u0442\u0438 \u0433\u0440\u0443:",
+      {
+        message_thread_id: threadId,
+        reply_markup: {
+          inline_keyboard: [[{ text: "\u{1F3AE} \u0412\u0456\u0434\u043A\u0440\u0438\u0442\u0438 \u0433\u0440\u0443", web_app: { url: WEBAPP_URL } }]]
+        }
+      }
+    );
+    return;
   }
   if (lowerText.startsWith("/set_bots_topic") && threadId) {
     setBotsTopicThread(chatId, threadId);

@@ -1,8 +1,9 @@
 import { sendBotMessage, setBotsTopicThread } from "./telegramApi";
 import { enforceNonPlayerMessageDelete } from "./groupPermissions";
-import { handlePreCheckoutQuery, handleSuccessfulPayment } from "./economy";
+import { handlePreCheckoutQuery, handleSuccessfulPayment, rollbackBuggedCrystals } from "./economy";
 
 const FIVE_MINUTES_SEC = 5 * 60;
+const WEBAPP_URL = process.env.WEBAPP_URL ? process.env.WEBAPP_URL : "https://mistral.run";
 
 export async function processTelegramUpdate(update: any) {
   if (update.pre_checkout_query) {
@@ -14,9 +15,9 @@ export async function processTelegramUpdate(update: any) {
   if (!msg) return;
 
   const chatId: number = msg.chat.id;
-  const userId: number | undefined = msg.from?.id;
+  const userId: number | undefined = msg.from ? msg.from.id : undefined;
   const threadId: number | undefined = msg.message_thread_id;
-  const text: string = (msg.text || "").trim();
+  const text: string = (msg.text ? msg.text : "").trim();
   const lowerText = text.toLowerCase();
 
   if (msg.successful_payment) {
@@ -31,6 +32,26 @@ export async function processTelegramUpdate(update: any) {
 
   if (threadId && text.startsWith("/")) {
     setBotsTopicThread(chatId, threadId);
+  }
+
+  if (lowerText.startsWith("/rollback_crystals")) {
+    const report = await rollbackBuggedCrystals();
+    await sendBotMessage(chatId, report, { message_thread_id: threadId });
+    return;
+  }
+
+  if (lowerText.startsWith("/start") || lowerText.startsWith("/play")) {
+    await sendBotMessage(
+      chatId,
+      "🕵️‍♂️ <b>Ігровий центр готовий!</b>\nНатисни кнопку нижче, щоб відкрити гру:",
+      {
+        message_thread_id: threadId,
+        reply_markup: {
+          inline_keyboard: [[{ text: "🎮 Відкрити гру", web_app: { url: WEBAPP_URL } }]],
+        },
+      }
+    );
+    return;
   }
 
   if (lowerText.startsWith("/set_bots_topic") && threadId) {
