@@ -1,0 +1,103 @@
+# Terminal Full Output
+# Terminal: pre-publish-status
+# Command: git branch --show-current && git fetch origin main && printf 'HEAD=' && git rev-parse HEAD && printf 'ORIGIN=' && git rev-parse origin/main && printf '\nSTATUS\n' && git status --short && printf '\nDIFF STAT\n' && git diff --stat
+# PID: 64758
+# Timestamp: 2026-11-19_17-57-41.998646
+# Original Length: 5622 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~$ [0mgit branch --show-current && git fetch origin main && printf 'HEAD=' && git rev-parse HEAD && printf 'ORIGIN=' && git rev-parse origin/main && printf '\nSTATUS\n' && git status --short && printf '\nDIFF STAT\n' && git diff --stat
+main
+From https://7f0548f6b28a1758d9bf7be630d36cb4.artifacts.cloudflare.net/git/prod/wdp_a9d70f2a0a6832865e000929
+ * branch            main       -> FETCH_HEAD
+HEAD=9d8b498e4ebfd940171b1a830c00fe09ed048038
+ORIGIN=9d8b498e4ebfd940171b1a830c00fe09ed048038
+STATUS
+ [31mM[m TODO.md
+ [31mM[m client/src/components/commandsGuideData.ts
+ [31mM[m client/src/components/game-center/DurakReference.css
+ [31mM[m client/src/components/game-center/DurakReferenceFlow.test.tsx
+ [31mM[m client/src/components/game-center/DurakReferenceFlow.tsx
+ [31mM[m client/src/components/game-center/GameCenterAdminPanel.tsx
+ [31mM[m client/src/components/game-center/GameCenterScreen.css
+ [31mM[m client/src/components/game-center/GameCenterScreen.tsx
+ [31mM[m client/src/components/game-center/gameCenterApi.ts
+ [31mM[m client/src/components/game/AdminPanel.tsx
+ [31mM[m client/src/components/game/EconomyScreen.tsx
+ [31mM[m client/src/components/game/GameRoomScreen.tsx
+ [31mM[m client/src/index.css
+ [31mM[m client/src/lib/gameApi.ts
+ [31mM[m client/src/lib/telegram.ts
+ [31mM[m client/src/pages/Home.tsx
+ [31mM[m docs/telegram-setup.md
+ [31mM[m drizzle/meta/_journal.json
+ [31mM[m drizzle/schema.ts
+ [31mM[m package.json
+ [31mM[m plan.md
+ [31mM[m pnpm-lock.yaml
+ [31mM[m scripts/configure-telegram-bot.mjs
+ [31mM[m server/_core/index.ts
+ [31mM[m server/game/arcade/durak.test.ts
+ [31mM[m server/game/arcade/durak.ts
+ [31mM[m server/game/arcade/payouts.test.ts
+ [31mM[m server/game/arcade/payouts.ts
+ [31mM[m server/game/arcade/routes.test.ts
+ [31mM[m server/game/arcade/routes.ts
+ [31mM[m server/game/arcade/tableService.ts
+ [31mM[m server/game/chatWagers.test.ts
+ [31mM[m server/game/chatWagers.ts
+ [31mM[m server/game/economy.test.ts
+ [31mM[m server/game/economy.ts
+ [31mM[m server/game/economyRoutes.ts
+ [31mM[m server/game/routes.ts
+ [31mM[m server/game/telegramBot.ts
+ [31mM[m shared/telegramCommands.test.ts
+ [31mM[m shared/telegramCommands.ts
+[31m??[m client/src/components/game/EconomyAdminPanel.tsx
+[31m??[m docs/telegram-stars-reference.md
+[31m??[m drizzle/0007_economy_stars.sql
+[31m??[m drizzle/0008_wager_escrow.sql
+[31m??[m server/game/arcade/reactionSocket.ts
+DIFF STAT
+ TODO.md                                            |  22 [32m+[m[31m-
+[m client/src/components/commandsGuideData.ts         |  25 [32m+[m[31m-
+[m .../src/components/game-center/DurakReference.css  |  20 [32m++
+[m .../game-center/DurakReferenceFlow.test.tsx        |  28 [32m+[m[31m-
+[m .../components/game-center/DurakReferenceFlow.tsx  |  74 [32m+++[m[31m---
+[m .../game-center/GameCenterAdminPanel.tsx           |   6 [32m+[m[31m-
+[m .../components/game-center/GameCenterScreen.css    |  22 [32m++
+[m .../components/game-center/GameCenterScreen.tsx    | 131 [32m++++++[m[31m---
+[m client/src/components/game-center/gameCenterApi.ts |  17 [32m++
+[m client/src/components/game/AdminPanel.tsx          |   5 [32m+[m[31m-
+[m client/src/components/game/EconomyScreen.tsx       |  70 [32m++++[m[31m-
+[m client/src/components/game/GameRoomScreen.tsx      |   4 [32m+[m[31m-
+[m client/src/index.css                               |   1 [32m+
+[m client/src/lib/gameApi.ts                          |  12 [32m+[m[31m-
+[m client/src/lib/telegram.ts                         |   1 [32m+
+[m client/src/pages/Home.tsx                          |   1 [32m+
+[m docs/telegram-setup.md                             |   2 [32m+[m[31m-
+[m drizzle/meta/_journal.json                         |  14 [32m+
+[m drizzle/schema.ts                                  |  33 [32m+++
+[m package.json                                       |   2 [32m+
+[m plan.md                                            |  25 [32m+[m[31m-
+[m pnpm-lock.yaml                                     |  46 [32m+++[m[31m-
+[m scripts/configure-telegram-bot.mjs                 |   8 [32m+[m[31m-
+[m server/_core/index.ts                              |   2 [32m+
+[m server/game/arcade/durak.test.ts                   |  68 [32m++[m[31m---
+[m server/game/arcade/durak.ts                        |  70 [32m++[m[31m---
+[m server/game/arcade/payouts.test.ts                 |  11 [32m+
+[m server/game/arcade/payouts.ts                      | 135 [32m+++[m[31m-------
+[m server/game/arcade/routes.test.ts                  |  23 [32m+[m[31m-
+[m server/game/arcade/routes.ts                       |  15 [32m+[m[31m-
+[m server/game/arcade/tableService.ts                 |  75 [32m+++++[m[31m-
+[m server/game/chatWagers.test.ts                     |   4 [32m+
+[m server/game/chatWagers.ts                          | 133 [32m++++++[m[31m----
+[m server/game/economy.test.ts                        |  19 [32m+[m[31m-
+[m server/game/economy.ts                             | 293 [32m++++++++++++++++++[m[31m---
+[m server/game/economyRoutes.ts                       |  78 [32m++++++
+[m server/game/routes.ts                              |  57 [32m++[m[31m--
+[m server/game/telegramBot.ts                         |  55 [32m+++[m[31m-
+[m shared/telegramCommands.test.ts                    |   9 [32m+
+[m shared/telegramCommands.ts                         |   2 [32m+
+[m 40 files changed, 1153 insertions(+), 465 deletions(-)
+[32mubuntu@sandbox:~/spyfallua$ [0m

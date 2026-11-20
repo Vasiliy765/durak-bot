@@ -1,0 +1,30 @@
+# Terminal Full Output
+# Terminal: default-2
+# Command: node --input-type=module <<'JS'
+import mysql from 'mysql2/promise';
+const db = await mysql.createConnection(process.env.DATABASE_URL);
+try {
+  const [tables] = await db.query(`SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name IN ('spy_chat_wagers','spy_chat_wager_bank','spy_chat_wager_bank_ledger') ORDER BY TABLE_NAME`);
+  console.log('Current wager tables:', tables.map(x=>x.TABLE_NAME).join(', ') || 'none');
+  const [rows] = await db.query('SELECT created_at FROM __drizzle_migrations ORDER BY created_at DESC LIMIT 2');
+  console.log('Latest migrations:', rows.map(x=>String(x.created_at)).join(', '));
+} finally { await db.end(); }
+JS
+# PID: 64758
+# Timestamp: 2026-11-18_21-56-40.576578
+# Original Length: 835 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mnode --input-type=module <<'JS'
+import mysql from 'mysql2/promise';
+const db = await mysql.createConnection(process.env.DATABASE_URL);
+try {
+  const [tables] = await db.query(`SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name IN ('spy_chat_wagers','spy_chat_wager_bank','spy_chat_wager_bank_ledger') ORDER BY TABLE_NAME`);
+  console.log('Current wager tables:', tables.map(x=>x.TABLE_NAME).join(', ') || 'none');
+  const [rows] = await db.query('SELECT created_at FROM __drizzle_migrations ORDER BY created_at DESC LIMIT 2');
+  console.log('Latest migrations:', rows.map(x=>String(x.created_at)).join(', '));
+} finally { await db.end(); }
+JS
+Current wager tables: none
+Latest migrations: 1795029022322, 1795026216308
+[32mubuntu@sandbox:~/spyfallua$ [0m

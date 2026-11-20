@@ -1,0 +1,62 @@
+# Terminal Full Output
+# Terminal: default-2
+# Command: pnpm check && pnpm test && pnpm build && git diff --check
+# PID: 64758
+# Timestamp: 2026-11-18_22-01-44.678965
+# Original Length: 4382 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mpnpm check && pnpm test && pnpm build && git diff --check
+> spyfallua@1.0.0 check /home/ubuntu/spyfallua
+> tsc --noEmit
+> spyfallua@1.0.0 test /home/ubuntu/spyfallua
+> vitest run
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90m/home/ubuntu/spyfallua
+[22m[90mstdout[2m | server/platform.test.ts
+[22m[39m[OAuth] Initialized with baseURL: https://api.manus.ai
+[22m[90mstderr[2m | server/platform.test.ts[2m > [22m[2mcurrent platform integration[2m > [22m[2mbinds signed app sessions to this project and accepts an empty display name
+[22m[39m[Auth] Session payload missing required fields
+[22m [32m✓[39m [2mserver/[22mauth[2m.logout.test.ts[22m[2m (1)
+[22m [32m✓[39m [2mserver/[22mplatform[2m.test.ts[22m[2m (5)
+[22m [32m✓[39m [2mserver/game/[22mauth[2m.test.ts[22m[2m (5)
+[22m [32m✓[39m [2mserver/game/[22mchatPranks[2m.test.ts[22m[2m (3)
+[22m [32m✓[39m [2mserver/game/[22mchatWagers[2m.test.ts[22m[2m (6)
+[22m [2m[90m↓[39m[22m [2mserver/game/[22meconomy[2m.integration.test.ts[22m[2m (1)[22m [2m[90m[skipped]
+[39m[22m [32m✓[39m [2mserver/game/[22meconomy[2m.test.ts[22m[2m (4)
+[22m [32m✓[39m [2mserver/game/[22mgroupGameCallbacks[2m.test.ts[22m[2m (16)
+[22m [32m✓[39m [2mserver/game/[22mgroupGameRules[2m.test.ts[22m[2m (13)
+[22m [32m✓[39m [2mserver/game/arcade/[22mbackendSafety[2m.test.ts[22m[2m (4)
+[22m [32m✓[39m [2mserver/game/arcade/[22mbattleship[2m.test.ts[22m[2m (9)
+[22m [32m✓[39m [2mserver/game/arcade/[22mblackjack[2m.test.ts[22m[2m (11)
+[22m [32m✓[39m [2mserver/game/arcade/[22mdurak[2m.test.ts[22m[2m (10)
+[22m [32m✓[39m [2mserver/game/arcade/[22mpayouts[2m.test.ts[22m[2m (12)
+[22m [32m✓[39m [2mserver/game/arcade/[22mplayableGames[2m.test.ts[22m[2m (1)
+[22m [32m✓[39m [2mserver/game/arcade/[22mstats[2m.test.ts[22m[2m (2)
+[22m [32m✓[39m [2mserver/game/arcade/[22mticTacToe[2m.test.ts[22m[2m (17)
+[22m [32m✓[39m [2mserver/game/arcade/[22mtimeoutPolicy[2m.test.ts[22m[2m (4)
+[22m [32m✓[39m [2mclient/src/lib/[22mtelegram[2m.test.ts[22m[2m (2)
+[22m [32m✓[39m [2mclient/src/components/game-center/[22mGameAssets[2m.test.tsx[22m[2m (2)
+[22m [32m✓[39m [2mclient/src/components/game-center/[22mbattleshipPlacement[2m.test.ts[22m[2m (4)
+[22m[2m Test Files [22m [1m[32m20 passed[39m[22m[2m | [22m[33m1 skipped[39m[90m (21)
+[39m[2m      Tests [22m [1m[32m131 passed[39m[22m[2m | [22m[33m1 skipped[39m[90m (132)
+[39m[2m   Start at [22m 22:01:39
+[2m   Duration [22m 1.83s[2m (transform 603ms, setup 0ms, collect 3.68s, tests 117ms, environment 3ms, prepare 943ms)
+[22m> spyfallua@1.0.0 build /home/ubuntu/spyfallua
+> vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[36mvite v7.3.7 [32mbuilding client environment for production...
+[36m[39m<script src="/api/platform/config.js"> in "/index.html" can't be bundled without type="module" attribute
+transforming (52) [2m../node_modules/.pnpm/react@19.2.1/node_modules/react/jsx
+/manus-storage/n2GRv5tm7Wt8_ada84778.jpg referenced in /manus-storage/n2GRv5tm7Wt8_ada84778.jpg didn't resolve at build time, it will remain unchanged to be resolved at runtime
+[22m[32m✓[39m 1718 modules transformed.
+[2m../dist/public/[22m[32mapi/platform/config.js     [39m[1m[2m  0.17 kB
+[22m[1m[22m[2m../dist/public/[22m[32mindex.html                 [39m[1m[2m  1.00 kB[22m[1m[22m[2m │ gzip:   0.60 kB
+[22m[2m../dist/public/[22m[2massets/[22m[35mindex-Czmjt28Z.css  [39m[1m[2m186.11 kB[22m[1m[22m[2m │ gzip:  35.64 kB
+[22m[2m../dist/public/[22m[2massets/[22m[36mindex-OJcgkgXZ.js   [39m[1m[33m637.71 kB[39m[22m[2m │ gzip: 177.16 kB
+[22m[33m(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[39m[32m✓ built in 2.30s
+[39m  [37mdist/[0m[1mindex.js[0m  [36m444.6kb
+[0m⚡ [32mDone in 10ms
+[32mubuntu@sandbox:~/spyfallua$ [0m

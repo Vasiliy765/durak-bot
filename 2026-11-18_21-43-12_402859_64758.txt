@@ -1,0 +1,81 @@
+# Terminal Full Output
+# Terminal: default-1
+# Command: printf '%s\n' '--- snapshots ---'; find drizzle/meta -maxdepth 1 -type f -printf '%f\n' | sort; printf '%s\n' '--- migration header ---'; sed -n '1,30p' drizzle/0006_chat_wagers.sql; printf '%s\n' '--- status ---'; git status --short --branch; git diff --check
+# PID: 64758
+# Timestamp: 2026-11-18_21-43-12.402859
+# Original Length: 3234 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mprintf '%s\n' '--- snapshots ---'; find drizzle/meta -maxdepth 1 -type f -printf '%f\n' | sort; printf '%s\n' '--- migration header ---'; sed -n '1,30p' drizzle/0006_chat_wagers.sql; printf '%s\n' '--- status ---'; git status --short --branch; git diff --check
+--- snapshots ---
+0000_snapshot.json
+0001_snapshot.json
+0002_snapshot.json
+0003_snapshot.json
+0004_snapshot.json
+0005_snapshot.json
+_journal.json
+--- migration header ---
+CREATE TABLE `spy_chat_wagers` (
+  `id` varchar(36) NOT NULL,
+  `chatId` varchar(64) NOT NULL,
+  `messageId` int NOT NULL,
+  `sourceMessageId` int NOT NULL,
+  `game` enum('coin','dice') NOT NULL,
+  `status` enum('pending','rolling','resolved','refunded','expired') NOT NULL DEFAULT 'pending',
+  `challengerId` varchar(64) NOT NULL,
+  `opponentId` varchar(64) DEFAULT NULL,
+  `stake` int NOT NULL,
+  `expiresAt` timestamp NOT NULL,
+  `round` int NOT NULL DEFAULT 0,
+  `challengerRoll` int DEFAULT NULL,
+  `opponentRoll` int DEFAULT NULL,
+  `winnerId` varchar(64) DEFAULT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `spy_chat_wager_source_uq` (`chatId`,`sourceMessageId`),
+  KEY `spy_chat_wager_status_deadline_idx` (`status`,`expiresAt`),
+  KEY `spy_chat_wager_chat_status_idx` (`chatId`,`status`)
+);
+CREATE TABLE `spy_chat_wager_bank` (
+  `id` int NOT NULL,
+  `balance` int NOT NULL DEFAULT 0,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+--- status ---
+## [32mmain
+[m [31mM[m TODO.md
+ [31mM[m client/src/components/game-center/GameAssets.css
+ [31mM[m client/src/components/game-center/GameAssets.tsx
+ [31mM[m client/src/components/game-center/GameCenterAdminPanel.tsx
+ [31mM[m client/src/components/game-center/GameCenterScreen.css
+ [31mM[m client/src/components/game-center/GameCenterScreen.tsx
+ [31mM[m client/src/components/game-center/gameCenterApi.ts
+ [31mM[m client/src/index.css
+ [31mM[m client/src/lib/telegram.ts
+ [31mM[m client/src/pages/Home.tsx
+ [31mM[m drizzle/meta/_journal.json
+ [31mM[m drizzle/schema.ts
+ [31mM[m plan.md
+ [31mM[m server/game/arcade/battleship.test.ts
+ [31mM[m server/game/arcade/battleship.ts
+ [31mM[m server/game/arcade/routes.ts
+ [31mM[m server/game/arcade/stats.test.ts
+ [31mM[m server/game/arcade/stats.ts
+ [31mM[m server/game/arcade/tableService.ts
+ [31mM[m server/game/telegramBot.ts
+[31m??[m client/src/components/game-center/GameAssets.test.tsx
+[31m??[m client/src/components/game-center/battleshipPlacement.test.ts
+[31m??[m client/src/components/game-center/battleshipPlacement.ts
+[31m??[m client/src/lib/telegram.test.ts
+[31m??[m docs/telegram-miniapp-deep-links.md
+[31m??[m drizzle/0006_chat_wagers.sql
+[31m??[m server/game/arcade/playableGames.test.ts
+[31m??[m server/game/arcade/playableGames.ts
+[31m??[m server/game/chatPranks.test.ts
+[31m??[m server/game/chatPranks.ts
+[31m??[m server/game/chatWagers.test.ts
+[31m??[m server/game/chatWagers.ts
+[32mubuntu@sandbox:~/spyfallua$ [0m

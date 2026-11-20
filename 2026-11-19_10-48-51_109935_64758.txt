@@ -1,0 +1,57 @@
+# Terminal Full Output
+# Terminal: default
+# Command: printf '%s\n' '--- CSS files ---'; find client/src -type f -name '*.css' -printf '%p\n' | sort; printf '%s\n' '--- style imports ---'; rg -n 'import .*\.css' client/src --glob '*.tsx' --glob '*.ts'; printf '%s\n' '--- inline background/color style literals ---'; rg -n 'style=\{\{|backgroundColor:|color: #[0-9a-fA-F]{3,8}|background: #[0-9a-fA-F]{3,8}' client/src --glob '*.tsx' --glob '*.ts' | head -100; printf '%s\n' '--- theme meta ---'; rg -n 'theme-color|color-scheme|Telegram.WebApp|setHeaderColor|setBackgroundColor' client server
+# PID: 64758
+# Timestamp: 2026-11-19_10-48-51.109935
+# Original Length: 5275 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mprintf '%s\n' '--- CSS files ---'; find client/src -type f -name '*.css' -printf '%p\n' | sort; printf '%s\n' '--- style imports ---'; rg -n 'import .*\.css' client/src --glob '*.tsx' --glob '*.ts'; printf '%s\n' '--- inline background/color style literals ---'; rg -n 'style=\{\{|backgroundColor:|color: #[0-9a-fA-F]{3,8}|background: #[0-9a-fA-F]{3,8}' client/src --glob '*.tsx' --glob '*.ts' | head -100; printf '%s\n' '--- theme meta ---'; rg -n 'theme-color|color-scheme|Telegram.WebApp|setHeaderColor|setBackgroundColor' client server
+--- CSS files ---
+client/src/components/CommandsScreen.css
+client/src/components/game-center/GameAssets.css
+client/src/components/game-center/GameCenterAdminPanel.css
+client/src/components/game-center/GameCenterScreen.css
+client/src/index.css
+--- style imports ---
+[0m[35mclient/src/main.tsx
+[0m[0m[32m9[0m:[0m[1m[31mimport "./index.css[0m";
+[0m[35mclient/src/components/CommandsScreen.tsx
+[0m[0m[32m15[0m:[0m[1m[31mimport "./CommandsScreen.css[0m";
+[0m[35mclient/src/components/game-center/GameAssets.tsx
+[0m[0m[32m3[0m:[0m[1m[31mimport "./GameAssets.css[0m";
+[0m[35mclient/src/components/game-center/GameCenterScreen.tsx
+[0m[0m[32m27[0m:[0m[1m[31mimport "./GameCenterScreen.css[0m";
+[0m[35mclient/src/components/game-center/GameCenterAdminPanel.tsx
+[0m[0m[32m4[0m:[0m[1m[31mimport "./GameCenterAdminPanel.css[0m";
+--- inline background/color style literals ---
+client/src/pages/Home.tsx:1144:              style={{ width: `${Math.min(100, (profile.xp % 250) / 2.5)}%` }}
+client/src/components/game-center/GameCenterScreen.tsx:1223:                  style={{
+client/src/components/game-center/GameCenterScreen.tsx:1265:                <span key={i} style={{ zIndex: i + 1, transform: `translate(${i * 4}px, ${-i * 2}px)` }}>
+client/src/components/game-center/GameCenterScreen.tsx:1340:            <div className="gc-hand-row" key={rowIndex} style={{ height: `${row.height}px` }}>
+client/src/components/game-center/GameCenterScreen.tsx:1354:                    style={{
+client/src/components/game-center/GameAssets.tsx:182:      style={{ "--suit-accent": color } as CSSProperties}
+client/src/components/game-center/GameAssets.tsx:207:      style={{
+client/src/components/game-center/GameAssets.tsx:244:                <span key={i} style={{ left: `${x}%`, top: `${y}%` }}>
+client/src/components/game-center/GameAssets.tsx:377:      style={{ "--grid-size": count } as CSSProperties}
+client/src/components/game-center/GameAssets.tsx:384:          style={{ gridColumn: column + 2, gridRow: 1 }}
+client/src/components/game-center/GameAssets.tsx:394:          style={{ gridColumn: 1, gridRow: row + 2 }}
+client/src/components/game-center/GameAssets.tsx:418:            style={{ gridColumn: column + 2, gridRow: row + 2 }}
+client/src/components/game/GameRoomScreen.tsx:241:  return <div className="player-row" style={{ animationDelay: `${index * 45}ms` }}><span className={`avatar ${owner ? "avatar-owner" : ""}`}>{player.avatarUrl ? <img src={player.avatarUrl} alt="" /> : initials}<i className={`online-dot ${player.online ? "is-online" : ""}`} /></span><div className="player-name"><strong>{player.firstName}{me ? " (ви)" : ""}</strong><small>{player.username ? `@${player.username}` : owner ? "Керівник операції" : "Агент команди"}</small></div>{owner && <span className="owner-chip"><Crown size={12} /> ВЛАСНИК</span>}<span className={`ready-chip ${player.ready ? "ready" : ""}`}>{player.ready ? <><Check size={12} /> ГОТОВИЙ</> : "ОЧІКУЄ"}</span>{canRemove && <button className="remove-player" onClick={onRemove} aria-label="Видалити гравця"><Trash2 size={14} /></button>}</div>;
+client/src/components/game/GameRoomScreen.tsx:250:    <div className="field-grid"><label className="field-label" style={{ gridColumn: "1 / -1" }}>Тип кімнати<select value={settings.isPrivate ? "private" : "public"} onChange={event => update("isPrivate", event.target.value === "private")}><option value="private">Приватна · лише за запрошенням</option><option value="public">Відкрита · доступна пошуку</option></select></label></div>
+client/src/components/DashboardLayout.tsx:239:          style={{ zIndex: 50 }}
+client/src/components/AIChatBox.tsx:197:      style={{ height }}
+client/src/components/ui/chart.tsx:296:                  style={{
+client/src/components/ui/chart.tsx:297:                    backgroundColor: item.color,
+client/src/components/ui/progress.tsx:23:        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+--- theme meta ---
+[0m[35mclient/index.html
+[0m[0m[32m6[0m:    <meta name="[0m[1m[31mtheme-color[0m" content="#111315" />
+[0m[35mclient/src/index.css
+[0m[0m[32m5[0m:  [0m[1m[31mcolor-scheme[0m: dark;
+[0m[35mclient/src/lib/telegram.ts
+[0m[0m[32m15[0m:  [0m[1m[31msetHeaderColor[0m?: (color: string) => void;
+[0m[32m16[0m:  [0m[1m[31msetBackgroundColor[0m?: (color: string) => void;
+[0m[32m57[0m:  webApp?.[0m[1m[31msetHeaderColor[0m?.("#111315");
+[0m[32m58[0m:  webApp?.[0m[1m[31msetBackgroundColor[0m?.("#111315");
+[32mubuntu@sandbox:~/spyfallua$ [0m

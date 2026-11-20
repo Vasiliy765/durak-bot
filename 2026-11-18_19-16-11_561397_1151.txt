@@ -1,0 +1,74 @@
+# Terminal Full Output
+# Terminal: default
+# Command: printf 'logo metadata: '; if test -f app.config.ts; then sed -n '1,100p' app.config.ts; else echo 'app.config.ts absent'; fi; printf '\npublic files:\n'; find public -maxdepth 3 -type f -printf '%p (%s bytes)\n' | sort; printf '\nasset references:\n'; rg -n "logo|icon|og:image" client/src public index.html app.config.ts 2>/dev/null | head -n 60
+# PID: 1151
+# Timestamp: 2026-11-18_19-16-11.561397
+# Original Length: 9605 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mprintf 'logo metadata: '; if test -f app.config.ts; then sed -n '1,100p' app.config.ts; else echo 'app.config.ts absent'; fi; printf '\npublic files:\n'; find public -maxdepth 3 -type f -printf '%p (%s bytes)\n' | sort; printf '\nasset references:\n'; rg -n "logo|icon|og:image" client/src public index.html app.config.ts 2>/dev/null | head -n 60
+logo metadata: export default { logoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519664027511873/FkQxskBteCqpsiVD.svg" };
+public files:
+public/manus-routes.json (70 bytes)
+asset references:
+app.config.ts:1:export default { logoUrl: "https://files.manuscdn.com/user_upload_by_module/session_file/310519664027511873/FkQxskBteCqpsiVD.svg" };
+client/src/index.css:46:.icon-button { width: 36px; height: 36px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.02); color: #a3aaad; transition: background .2s, border-color .2s, color .2s; }
+client/src/index.css:47:.icon-button:hover { background: rgba(255,255,255,.07); border-color: var(--line-strong); color: var(--text); }
+client/src/index.css:123:.action-icon { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid rgba(202,212,212,.13); border-radius: 10px; color: #bbc2c0; background: rgba(255,255,255,.025); }
+client/src/index.css:124:.red-icon { border-color: rgba(240,68,82,.22); color: #f17a82; background: rgba(240,68,82,.08); }
+client/src/index.css:184:.open-room-icon { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 8px; background: rgba(240,68,82,.08); color: #e57a81; }
+client/src/index.css:207:.stat-icon { position: absolute; top: 12px; right: 13px; color: #ab777a; }
+client/src/index.css:214:.achievement-icon { color: #788184; }
+client/src/index.css:215:.achievement-card.earned .achievement-icon { color: var(--amber); }
+client/src/index.css:259:.setting-icon { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 8px; background: rgba(255,255,255,.035); color: #ac7b7e; }
+client/src/index.css:493:  .action-icon { grid-row: 1 / 4; width: 36px; height: 36px; }
+client/src/index.css:520:  .stat-icon { top: 8px; right: 8px; }.stat-icon svg { width: 14px; }
+client/src/index.css:688:.wallet-action-icon { width: 31px; height: 31px; display: grid; place-items: center; margin-bottom: 12px; border: 1px solid rgba(145,214,192,.2); border-radius: 9px; color: var(--mint); background: rgba(145,214,192,.055); }
+client/src/index.css:689:.wallet-daily-card .wallet-action-icon { border-color: rgba(212,173,101,.22); color: var(--amber); background: rgba(212,173,101,.06); }
+client/src/index.css:702:.transaction-ledger-icon { width: 28px; height: 28px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 8px; background: rgba(255,255,255,.035); color: #a99062; }
+client/src/index.css:734:.inventory-item-icon { width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 8px; color: #a18a62; }
+client/src/index.css:735:.inventory-item-card.equipped .inventory-item-icon { border-color: rgba(145,214,192,.22); color: var(--mint); }
+client/src/pages/Home.tsx:383:            className="icon-button sound-button"
+client/src/pages/Home.tsx:403:            className="icon-button mobile-menu-button"
+client/src/pages/Home.tsx:735:            <span className="action-icon red-icon">
+client/src/pages/Home.tsx:746:            <span className="action-icon">
+client/src/pages/Home.tsx:757:            <span className="action-icon">
+client/src/pages/Home.tsx:939:                <span className="open-room-icon">
+client/src/pages/Home.tsx:1064:                  item.metadata.icon === "eye"
+client/src/pages/Home.tsx:1066:                    : item.metadata.icon === "crosshair"
+client/src/pages/Home.tsx:1134:            icon={<Gamepad2 size={17} />}
+client/src/pages/Home.tsx:1139:            icon={<Trophy size={17} />}
+client/src/pages/Home.tsx:1144:            icon={<Target size={17} />}
+client/src/pages/Home.tsx:1149:            icon={<Crosshair size={17} />}
+client/src/pages/Home.tsx:1154:            icon={<Eye size={17} />}
+client/src/pages/Home.tsx:1159:            icon={<Shield size={17} />}
+client/src/pages/Home.tsx:1180:              <span className="achievement-icon">
+client/src/pages/Home.tsx:1202:  icon,
+client/src/pages/Home.tsx:1206:  icon: React.ReactNode;
+client/src/pages/Home.tsx:1210:      <span className="stat-icon">{icon}</span>
+client/src/pages/Home.tsx:1412:            <span className="setting-icon">
+client/src/pages/Home.tsx:1431:            <span className="setting-icon">
+client/src/pages/Home.tsx:1446:                <span className="setting-icon">
+client/src/pages/Home.tsx:1577:              icon={<Users size={17} />}
+client/src/pages/Home.tsx:1582:              icon={<Radio size={17} />}
+client/src/pages/Home.tsx:1587:              icon={<Trophy size={17} />}
+client/src/pages/ComponentShowcase.tsx:236:          <Button variant="outline" size="icon" onClick={toggleTheme}>
+client/src/pages/ComponentShowcase.tsx:398:                  <Button size="icon">
+client/src/components/game/EconomyScreen.tsx:136:        <div className="economy-streak-heading"><span className="setting-icon"><Gift size={18} /></span><span><b>Щоденна серія</b><small>Бонус зростає за регулярність</small></span></div>
+client/src/components/game/EconomyScreen.tsx:155:            <span className="wallet-action-icon"><Clock3 size={18} /></span>
+client/src/components/game/EconomyScreen.tsx:163:            <span className="wallet-action-icon"><Gift size={18} /></span>
+client/src/components/game/EconomyScreen.tsx:174:          {overview?.transactions.length ? overview.transactions.map((entry, index) => <div className="economy-transaction-row" key={`${entry.kind}-${entry.createdAt}-${index}`}><span className="transaction-ledger-icon">{entry.amount >= 0 ? <Gift size={15} /> : <ShoppingBag size={15} />}</span><span className="transaction-ledger-copy"><b>{entry.note}</b><small>{formatDate(entry.createdAt)}</small></span><strong className={entry.amount >= 0 ? "positive" : "negative"}>{entry.amount > 0 ? "+" : ""}{entry.amount}</strong></div>) : <p className="empty-note">Поки що операцій немає. Заберіть першу зарплату або щоденний бонус.</p>}
+client/src/components/game/EconomyScreen.tsx:200:          <span className="inventory-item-icon">{item.equipped ? <Check size={17} /> : <Package size={17} />}</span><div><span className="shop-item-category">{CATEGORY_LABEL[item.category] || item.category}</span><h3>{item.name}</h3><p>{item.description}</p></div><button className={`button ${item.equipped ? "button-outline" : "button-primary"} button-small`} disabled={item.equipped || busy !== ""} onClick={() => void equip(item)}>{item.equipped ? "Екіпіровано" : busy === item.itemId ? "Зберігаємо…" : "Екіпірувати"}</button>
+client/src/components/game/AdminPanel.tsx:94:      <div className="admin-stat-grid"><AdminStat label="ЗАРЕЄСТРОВАНО" value={overview?.users ?? 0} icon={<Users size={17} />} /><AdminStat label="АКТИВНІ КІМНАТИ" value={overview?.activeRooms ?? 0} icon={<Radio size={17} />} /><AdminStat label="ЗАВЕРШЕНО ПАРТІЙ" value={overview?.gamesPlayed ?? 0} icon={<Trophy size={17} />} /></div>
+client/src/components/game/AdminPanel.tsx:110:function AdminStat({ label, value, icon }: { label: string; value: number; icon: React.ReactNode }) {
+client/src/components/game/AdminPanel.tsx:111:  return <div className="stat-card"><span className="stat-icon">{icon}</span><span className="eyebrow">{label}</span><strong>{value}</strong></div>;
+client/src/components/game-center/GameCenterScreen.tsx:458:                className="gc-icon"
+client/src/components/game-center/GameCenterScreen.tsx:1578:              className="gc-icon gc-refresh"
+client/src/components/game/GameRoomScreen.tsx:133:        <button className="icon-button" onClick={onBack} aria-label="Повернутися"><ArrowLeft size={19} /></button>
+client/src/components/game/GameRoomScreen.tsx:135:        <button className="icon-button" onClick={copyInvite} aria-label="Копіювати запрошення"><Copy size={17} /></button>
+client/src/components/game/GameRoomScreen.tsx:234:      {editing && <div className="modal-backdrop" role="presentation" onClick={() => setEditing(false)}><section className="modal-card" role="dialog" aria-modal="true" aria-label="Налаштування кімнати" onClick={event => event.stopPropagation()}><header className="modal-header"><div><span className="eyebrow">КЕРУВАННЯ ОПЕРАЦІЄЮ</span><h2>Налаштування кімнати</h2></div><button className="icon-button" onClick={() => setEditing(false)}><X size={18} /></button></header><RoomSettingsForm settings={editSettings} categories={categories} onChange={setEditSettings} /><div className="modal-actions"><button className="button button-quiet" onClick={() => setEditing(false)}>Скасувати</button><button className="button button-primary" disabled={working} onClick={saveSettings}>Зберегти</button></div></section></div>}
+client/src/components/ManusDialog.tsx:14:  logo?: string;
+client/src/components/ManusDialog.tsx:23:  logo,
+client/src/components/ManusDialog.tsx:56:          {logo ? (
+client/src/components/ManusDialog.tsx:59:                src={logo}
+[32mubuntu@sandbox:~/spyfallua$ [0m

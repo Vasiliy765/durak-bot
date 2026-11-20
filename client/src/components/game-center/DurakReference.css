@@ -1,0 +1,715 @@
+/* Screenshot-aligned Durak-only skin. Other Game Center screens keep the shared graphite console. */
+:root {
+  --durak-night: #101011;
+  --durak-panel: #202021;
+  --durak-panel-raised: #29292a;
+  --durak-panel-soft: #171718;
+  --durak-text: #f4f4f4;
+  --durak-muted: #858588;
+  --durak-coral: #f1364b;
+  --durak-green: #48cf59;
+  --durak-teal: #4fd5c6;
+}
+
+.gc-screen--durak-reference {
+  position: fixed !important;
+  z-index: 1100 !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  color: var(--durak-text);
+  background:
+    radial-gradient(ellipse at 50% 15%, rgba(71, 14, 23, .4), transparent 61%),
+    var(--durak-night);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+.gc-screen--durak-reference,
+.gc-screen--durak-reference * { box-sizing: border-box; }
+.gc-screen--durak-reference > .gc-head { display: none !important; }
+
+.gc-durak-lobby {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: max(18px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px)) 16px max(20px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px));
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.gc-durak-lobby::-webkit-scrollbar { display: none; }
+.gc-durak-lobby-head {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gc-durak-lobby-head h1 {
+  min-width: 0;
+  margin: 0;
+  flex: 1;
+  color: var(--durak-text);
+  font-size: 21px;
+  font-weight: 760;
+  line-height: 1.15;
+  letter-spacing: -.35px;
+}
+.gc-durak-balance-chip {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  color: var(--durak-green);
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+}
+.gc-durak-balance-chip b { color: var(--durak-teal); font-size: 15px; font-weight: 750; }
+.gc-durak-back-fallback,
+.gc-durak-sheet-back-fallback,
+.gc-durak-live-back-fallback {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: var(--durak-text);
+  background: rgba(255,255,255,.07);
+}
+.gc-durak-message {
+  margin: 11px 0 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(79,213,198,.18);
+  border-radius: 12px;
+  color: #b7e8e0;
+  background: rgba(19,63,59,.45);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.gc-durak-message.is-error {
+  border-color: rgba(241,54,75,.28);
+  color: #ffb5bd;
+  background: rgba(88,25,34,.52);
+}
+
+.gc-durak-launch-card {
+  margin-top: 22px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.035);
+  border-radius: 22px;
+  background: linear-gradient(155deg, #222223, #1d1d1e 70%);
+  box-shadow: 0 10px 28px rgba(0,0,0,.2);
+}
+.gc-durak-launch-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+.gc-durak-launch-actions button {
+  min-width: 0;
+  min-height: 52px;
+  padding: 10px 8px;
+  border: 0;
+  border-radius: 17px;
+  color: var(--durak-text);
+  font-size: 16px;
+  font-weight: 720;
+  line-height: 1.15;
+  transition: transform .16s ease, filter .16s ease, background .16s ease;
+}
+.gc-durak-launch-actions button:active { transform: scale(.985); }
+.gc-durak-launch-actions button:disabled { opacity: .56; }
+.gc-durak-launch-primary {
+  background: var(--durak-coral);
+  box-shadow: 0 7px 22px rgba(241,54,75,.4), 0 0 22px rgba(241,54,75,.17);
+}
+.gc-durak-launch-secondary { background: #29292a; }
+.gc-durak-launch-meta {
+  min-height: 23px;
+  margin-top: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #969699;
+  font-size: 12px;
+  line-height: 1;
+}
+.gc-durak-launch-meta i { color: #5b5b5d; font-style: normal; }
+.gc-durak-launch-meta svg:first-of-type { color: #258dff; }
+.gc-durak-launch-meta svg:last-of-type { color: var(--durak-green); }
+
+.gc-durak-rooms-heading {
+  min-height: 30px;
+  margin: 24px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.gc-durak-rooms-heading h2 {
+  margin: 0;
+  color: #88888b;
+  font-size: 12px;
+  font-weight: 730;
+  line-height: 1.2;
+  letter-spacing: .55px;
+}
+.gc-durak-rooms-heading button {
+  min-height: 36px;
+  padding: 5px 0 5px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 0;
+  color: #ef5364;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 650;
+}
+.gc-durak-rooms-heading button:disabled { opacity: .55; }
+.gc-durak-rooms-heading .is-spinning { animation: durak-spin .9s linear infinite; }
+@keyframes durak-spin { to { transform: rotate(360deg); } }
+.gc-durak-room-list { min-width: 0; padding-top: 27px; }
+.gc-durak-room-status { margin: 30px 0; color: var(--durak-muted); text-align: center; font-size: 14px; }
+.gc-durak-empty-state {
+  min-height: 205px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+}
+.gc-durak-empty-card {
+  width: 47px;
+  height: 63px;
+  margin-bottom: 2px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 5px;
+  filter: drop-shadow(0 5px 9px rgba(0,0,0,.4));
+  transform: rotate(-3deg);
+}
+.gc-durak-empty-card .gc-playing-card { width: 43px !important; height: auto !important; }
+.gc-durak-empty-state > b { color: var(--durak-text); font-size: 16px; font-weight: 740; line-height: 1.3; }
+.gc-durak-empty-state p { margin: 0; color: #818184; font-size: 14px; line-height: 1.4; }
+.gc-durak-room-row {
+  width: 100%;
+  min-height: 64px;
+  margin: 0 0 8px;
+  padding: 9px 10px;
+  display: grid;
+  grid-template-columns: 35px minmax(0,1fr) auto 16px;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(255,255,255,.04);
+  border-radius: 16px;
+  color: var(--durak-text);
+  background: #202021;
+  text-align: left;
+}
+.gc-durak-room-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: #fa6372;
+  background: rgba(241,54,75,.12);
+}
+.gc-durak-room-copy { min-width: 0; display: grid; gap: 4px; }
+.gc-durak-room-copy b { overflow: hidden; color: #f3f3f3; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.gc-durak-room-copy small { color: #929295; font-size: 11px; line-height: 1.2; }
+.gc-durak-room-row > strong,
+.gc-durak-my-table-list strong { display: inline-flex; align-items: center; gap: 4px; color: var(--durak-green); font-size: 13px; }
+.gc-durak-room-chevron { color: #727275; transform: rotate(-90deg); }
+.gc-durak-my-tables { margin-top: 14px; border-top: 1px solid rgba(255,255,255,.06); }
+.gc-durak-my-tables > summary {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b3b3b6;
+  font-size: 13px;
+  list-style: none;
+  cursor: pointer;
+}
+.gc-durak-my-tables > summary::-webkit-details-marker { display: none; }
+.gc-durak-my-tables > summary b { color: #8b8b8e; font-size: 12px; }
+.gc-durak-my-tables > summary svg { margin-left: auto; transition: transform .16s ease; }
+.gc-durak-my-tables[open] > summary svg { transform: rotate(180deg); }
+.gc-durak-my-table-list { display: grid; gap: 6px; padding-bottom: 8px; }
+.gc-durak-my-table-list > button {
+  min-width: 0;
+  min-height: 47px;
+  padding: 7px 10px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: 2px 10px;
+  border: 1px solid rgba(255,255,255,.04);
+  border-radius: 12px;
+  color: #ececee;
+  background: #202021;
+  text-align: left;
+}
+.gc-durak-my-table-list > button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+.gc-durak-my-table-list > button small { color: #8a8a8d; font-size: 11px; }
+.gc-durak-my-table-list > button strong { grid-column: 2; grid-row: 1 / span 2; }
+
+.gc-durak-sheet-backdrop {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: max(18px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px));
+  background: rgba(0,0,0,.7);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+.gc-durak-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  min-width: 0;
+  max-height: 88dvh;
+  padding: 9px 16px max(16px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.045);
+  border-bottom: 0;
+  border-radius: 25px 25px 0 0;
+  color: var(--durak-text);
+  background: #202021;
+  box-shadow: 0 -12px 38px rgba(0,0,0,.35);
+  animation: durak-sheet-rise .22s cubic-bezier(.2,.75,.25,1) both;
+}
+@keyframes durak-sheet-rise { from { transform: translateY(22px); opacity: .88; } to { transform: translateY(0); opacity: 1; } }
+.gc-durak-create-sheet { min-height: 57dvh; }
+.gc-durak-sheet-handle {
+  width: 36px;
+  height: 4px;
+  margin: 0 auto 14px;
+  flex: 0 0 auto;
+  border-radius: 99px;
+  background: #363638;
+}
+.gc-durak-sheet-heading { min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gc-durak-sheet-heading h2 { margin: 0; color: #f6f6f6; font-size: 21px; font-weight: 750; line-height: 1.2; letter-spacing: -.3px; }
+.gc-durak-sheet-heading p { margin: 4px 0 0; color: #8d8d90; font-size: 12px; line-height: 1.3; }
+.gc-durak-progress { min-height: 22px; margin: 12px 0 13px; display: flex; align-items: center; gap: 7px; }
+.gc-durak-progress span { width: 8px; height: 5px; border-radius: 99px; background: #333335; transition: width .18s ease, background .18s ease; }
+.gc-durak-progress span.is-active { width: 24px; background: var(--durak-coral); }
+.gc-durak-progress span.is-complete { background: rgba(241,54,75,.44); }
+.gc-durak-step-content { min-height: 0; flex: 1 1 auto; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; }
+.gc-durak-step-content::-webkit-scrollbar { display: none; }
+.gc-durak-fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.gc-durak-fieldset + .gc-durak-fieldset { margin-top: 23px; }
+.gc-durak-fieldset legend { margin-bottom: 10px; color: #858588; font-size: 12px; font-weight: 720; line-height: 1.2; letter-spacing: .45px; }
+.gc-durak-segmented {
+  min-height: 48px;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 5px;
+  border-radius: 17px;
+  background: #29292a;
+}
+.gc-durak-segmented button,
+.gc-durak-segmented > span {
+  min-width: 0;
+  min-height: 40px;
+  padding: 7px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 13px;
+  color: #969699;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 680;
+  line-height: 1.15;
+  text-align: center;
+}
+.gc-durak-segmented .is-selected,
+.gc-durak-segmented button.is-selected,
+.gc-durak-segmented > span.is-selected {
+  color: #fff;
+  background: var(--durak-coral);
+  box-shadow: 0 3px 11px rgba(241,54,75,.2);
+}
+.gc-durak-segmented button:disabled { color: #5c5c5e; background: #252526; opacity: .7; }
+.gc-durak-field-hint { min-height: 20px; margin: 9px 4px 0; color: #88888b; font-size: 12px; line-height: 1.45; }
+.gc-durak-deck-fieldset { padding-top: 2px; }
+.gc-durak-player-counts { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 8px; }
+.gc-durak-player-counts button {
+  min-width: 0;
+  min-height: 47px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: #aaa;
+  background: #29292a;
+  font-size: 16px;
+  font-weight: 700;
+}
+.gc-durak-player-counts button.is-selected { border-color: var(--durak-coral); color: #fff; background: rgba(241,54,75,.18); box-shadow: inset 0 0 0 1px rgba(241,54,75,.12); }
+.gc-durak-stake-value {
+  min-height: 48px;
+  margin: 1px 0 9px;
+  padding: 8px 13px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 14px;
+  color: var(--durak-green);
+  background: #29292a;
+}
+.gc-durak-stake-value b { color: #f6f6f6; font-size: 20px; }
+.gc-durak-stake-options { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 7px; }
+.gc-durak-stake-options button {
+  min-width: 0;
+  min-height: 43px;
+  padding: 5px 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: #b2b2b4;
+  background: #29292a;
+  font-size: 13px;
+  font-weight: 680;
+}
+.gc-durak-stake-options button svg { flex: 0 0 auto; color: var(--durak-green); }
+.gc-durak-stake-options button.is-selected { border-color: var(--durak-coral); color: #fff; background: rgba(241,54,75,.17); }
+.gc-durak-bank-estimate { margin: 10px 4px 0; display: flex; align-items: center; gap: 5px; color: #87878a; font-size: 12px; line-height: 1.3; }
+.gc-durak-bank-estimate svg { flex: 0 0 auto; color: var(--durak-green); }
+.gc-durak-sheet-actions { margin-top: auto; padding-top: 14px; display: grid; gap: 8px; flex: 0 0 auto; }
+.gc-durak-primary-button,
+.gc-durak-secondary-button,
+.gc-durak-rematch-disabled {
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 17px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 740;
+  line-height: 1.2;
+}
+.gc-durak-primary-button { background: var(--durak-coral); box-shadow: 0 7px 22px rgba(241,54,75,.35), 0 0 20px rgba(241,54,75,.13); }
+.gc-durak-primary-button:disabled { opacity: .55; box-shadow: none; }
+.gc-durak-secondary-button { color: #d2d2d4; background: #2a2a2b; }
+.gc-durak-secondary-button:disabled { opacity: .56; }
+.gc-durak-join-backdrop { z-index: 1210; }
+.gc-durak-join-sheet { min-height: 0; padding-bottom: max(18px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px)); }
+.gc-durak-join-facts { margin-top: 18px; display: grid; gap: 8px; color: #aaa; font-size: 13px; }
+.gc-durak-join-facts b { display: flex; align-items: center; gap: 6px; color: var(--durak-green); font-size: 14px; }
+.gc-durak-sheet-note { margin: 16px 2px 0; color: #858588; font-size: 12px; line-height: 1.45; }
+.gc-durak-join-sheet .gc-durak-sheet-actions { margin-top: 20px; }
+
+.gc-durak-result {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  flex: 1 1 auto;
+  padding: max(26px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px)) 16px max(22px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: radial-gradient(ellipse at 50% 18%, rgba(94,20,29,.36), transparent 58%);
+}
+.gc-durak-result-hero {
+  min-height: 105px;
+  padding: 19px 15px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  background: #202021;
+  text-align: center;
+}
+.gc-durak-result-hero h1 { margin: 0; color: var(--durak-coral); font-size: 24px; font-weight: 780; line-height: 1.2; }
+.gc-durak-result-hero p { margin: 7px 0 8px; color: #929295; font-size: 13px; line-height: 1.3; }
+.gc-durak-result-hero strong { display: inline-flex; align-items: center; gap: 6px; color: var(--durak-coral); font-size: 19px; }
+.gc-durak-result-hero strong svg { color: var(--durak-green); }
+.gc-durak-result-hero small { margin-top: 3px; color: #77777a; font-size: 10px; }
+.gc-durak-result-players { margin-top: 14px; display: grid; gap: 8px; }
+.gc-durak-result-player {
+  min-height: 58px;
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: 29px 39px minmax(0,1fr) auto;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(255,255,255,.035);
+  border-radius: 18px;
+  background: #202021;
+}
+.gc-durak-result-rank { width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; color: #777; background: #29292a; font-size: 12px; font-weight: 720; }
+.gc-durak-result-player.is-winner .gc-durak-result-rank { color: #ffc95c; background: rgba(255,191,60,.13); }
+.gc-durak-result-avatar { width: 37px; height: 37px; display: grid; place-items: center; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; color: white; background: #38383a; font-size: 15px; font-weight: 720; }
+.gc-durak-result-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.gc-durak-result-name { min-width: 0; display: grid; gap: 3px; }
+.gc-durak-result-name b { overflow: hidden; color: #f0f0f2; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.gc-durak-result-name small { color: #88888b; font-size: 11px; }
+.gc-durak-result-player.is-loser .gc-durak-result-name small,
+.gc-durak-result-player.is-loser > strong { color: var(--durak-coral); }
+.gc-durak-result-player.is-winner > strong { color: var(--durak-teal); }
+.gc-durak-result-player > strong { display: inline-flex; align-items: center; gap: 5px; color: #9a9a9d; font-size: 14px; }
+.gc-durak-result-player > strong svg { color: var(--durak-green); }
+.gc-durak-result-actions { margin-top: 18px; display: grid; gap: 8px; }
+.gc-durak-rematch-disabled { color: #77777a; background: #29292a; opacity: .72; }
+.gc-durak-result-link { min-height: 38px; border: 0; color: #99999c; background: transparent; font-size: 13px; }
+
+/* The existing game projection/hand remains the sole source of cards and legal actions. */
+.gc-screen--durak-reference .gc-table-screen--durak {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: max(0px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px)) 9px max(9px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px));
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 22%, rgba(77,13,22,.44), transparent 59%);
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live {
+  min-height: 0;
+  gap: 4px;
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-game-state {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-projection {
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live > .gc-table-meta { display: none !important; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-game-state {
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-game-state > h2,
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-turn-banner,
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-seats { display: none !important; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-projection {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game {
+  min-height: 0;
+  height: 100%;
+  flex: 1 1 auto;
+  grid-template-rows: max-content minmax(76px,16dvh) minmax(52px,9dvh) minmax(93px,1fr) max-content minmax(128px,22dvh) max-content max-content;
+  gap: 5px;
+  color: var(--durak-text);
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game.has-large-hand {
+  grid-template-rows: max-content minmax(54px,11dvh) minmax(46px,7dvh) minmax(66px,1fr) max-content minmax(112px,19dvh) max-content max-content;
+  gap: 3px;
+}
+.gc-screen--durak-reference .gc-durak-topbar { display: flex; align-items: center; justify-content: flex-start; padding-right: 40px; gap: 6px; }
+.gc-screen--durak-reference .gc-durak-chip { width: auto; min-width: 0; flex: 0 0 auto; white-space: nowrap; min-height: 36px; padding: 4px 7px; flex-direction: row; gap: 4px; border-color: rgba(255,255,255,.035); border-radius: 11px; background: rgba(36,36,37,.94); box-shadow: none; }
+.gc-screen--durak-reference .gc-durak-chip small { color: #a1a1a4; font-size: 11px; }
+.gc-screen--durak-reference .gc-durak-chip b { color: #efeff0; font-size: 12px; }
+.gc-screen--durak-reference .gc-durak-bank b { color: #f05a69; }
+.gc-screen--durak-reference .gc-durak-trump-chip b.is-red { color: #ff7380; }
+.gc-screen--durak-reference .gc-durak-game .gc-opponents { min-height: 0; align-content: center; }
+.gc-screen--durak-reference .gc-durak-resource-row { align-self: stretch; }
+.gc-screen--durak-reference .gc-durak-table { border: 0; border-radius: 0; background: radial-gradient(ellipse at 50% 53%, rgba(91,17,27,.28), transparent 72%); box-shadow: none; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-table .gc-empty-table { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-turn-note { min-height: 28px; padding: 0 6px; display: flex; align-items: center; justify-content: center; color: #8f8b8c; text-align: center; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-turn-note > span { font-size: 13px; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-turn-note > b,
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-turn-note > small { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.gc-screen--durak-reference .gc-durak-game .gc-hand-card.selected { filter: drop-shadow(0 0 8px rgba(241,54,75,.78)); }
+.gc-screen--durak-reference .gc-durak-game .gc-legal-actions .gc-button { min-height: 40px; border-radius: 13px; }
+.gc-screen--durak-reference .gc-table-screen--durak:not(.gc-table-screen--durak-live) .gc-game-state { margin: 0; }
+.gc-screen--durak-reference .gc-table-screen--durak:not(.gc-table-screen--durak-live) .gc-card { border-color: rgba(255,255,255,.045); border-radius: 17px; background: #202021; color: var(--durak-text); }
+.gc-durak-live-back-fallback { position: absolute; z-index: 6; top: max(8px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px)); left: 8px; width: 31px; height: 31px; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-refresh { display: none !important; }
+.gc-durak-sound-toggle { position: fixed; z-index: 1220; top: max(8px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px)); right: 9px; display: grid; width: 32px; height: 32px; place-items: center; padding: 0; border: 1px solid rgba(151,174,178,.12); border-radius: 10px; background: #1b2528; color: #a7b8ba; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.gc-durak-sound-toggle:active { transform: scale(.96); }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools {
+  top: auto;
+  right: auto;
+  bottom: calc(max(8px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px)) + 22dvh);
+  left: 16px;
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools > summary {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #29292a;
+  color: #c8c8ca;
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools-panel {
+  top: auto;
+  right: auto;
+  bottom: calc(max(8px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px)) + 22dvh + 48px);
+  left: 8px;
+  width: min(360px, calc(100vw - 16px));
+  max-height: min(60dvh, 500px);
+}
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-refresh { display: flex; width: 100%; min-height: 38px; align-items: center; justify-content: center; gap: 7px; margin: 0 0 10px; }
+
+@media (max-width: 360px) {
+  .gc-durak-lobby { padding-right: 15px; padding-left: 15px; }
+  .gc-durak-launch-card { margin-top: 18px; padding: 10px; }
+  .gc-durak-launch-actions { gap: 7px; }
+  .gc-durak-launch-actions button { min-height: 50px; font-size: 15px; }
+  .gc-durak-launch-meta { gap: 5px; font-size: 11px; }
+  .gc-durak-empty-state { min-height: 190px; }
+  .gc-durak-create-sheet { min-height: 59dvh; padding-right: 15px; padding-left: 15px; }
+  .gc-durak-fieldset + .gc-durak-fieldset { margin-top: 18px; }
+  .gc-durak-stake-options { gap: 5px; }
+  .gc-durak-stake-options button { gap: 3px; font-size: 12px; }
+  .gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-topbar { padding-right: 36px; gap: 4px; }
+  .gc-screen--durak-reference .gc-durak-chip { min-height: 34px; padding: 3px 5px; }
+  .gc-screen--durak-reference .gc-durak-chip b { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-durak-launch-actions button,
+  .gc-durak-progress span,
+  .gc-durak-sheet,
+  .gc-durak-my-tables > summary svg { transition: none !important; animation: none !important; }
+}
+
+
+/* Native Telegram BackButton is preferred; these controls exist only in desktop Preview. */
+.gc-durak-sheet-back-fallback { position: absolute; z-index: 4; top: 11px; left: 12px; }
+.gc-durak-sheet.has-back-fallback .gc-durak-sheet-heading { padding-left: 39px; }
+.gc-screen--durak-reference--fallback .gc-table-screen--durak-live .gc-durak-topbar { padding-left: 37px; }
+.gc-durak-table-message {
+  position: absolute;
+  z-index: 1300;
+  top: max(10px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px));
+  left: 12px;
+  right: 12px;
+  max-width: 536px;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+.gc-screen--durak-reference .gc-table-screen--durak-result { padding: 0 !important; }
+.gc-screen--durak-reference .gc-table-screen--durak-result > .gc-table-meta { display: none !important; }
+@media (max-width: 360px) {
+  .gc-screen--durak-reference--fallback .gc-table-screen--durak-live .gc-durak-topbar { padding-left: 36px; }
+}
+
+
+/* Reactions replace the former left-side history button; the history/dispute control stays separately accessible. */
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-reactions { position: fixed; z-index: 1190; left: 16px; bottom: calc(max(8px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px)) + 46dvh); }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-reactions > summary { width: 40px; height: 40px; display: grid; place-items: center; list-style: none; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; color: #c8c8ca; background: #29292a; cursor: pointer; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-reactions > summary::-webkit-details-marker { display: none; }
+.gc-live-reaction-picker { position: absolute; left: 0; bottom: 48px; width: min(300px, calc(100vw - 32px)); display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; padding: 8px; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; background: rgba(32,32,33,.97); box-shadow: 0 10px 32px rgba(0,0,0,.4); }
+.gc-live-reaction-picker button { min-width: 34px; min-height: 38px; padding: 0; border: 0; border-radius: 12px; color: white; background: #29292a; font-size: 20px; cursor: pointer; }
+.gc-live-reaction-picker button:active { transform: scale(.9); }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools { top: max(52px, calc(env(safe-area-inset-top, 0px) + 42px), calc(var(--tg-safe-area-inset-top, 0px) + 42px)); right: 12px; bottom: auto; left: auto; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools-panel { top: calc(max(52px, env(safe-area-inset-top, 0px), var(--tg-safe-area-inset-top, 0px)) + 42px); right: 8px; bottom: auto; left: auto; width: min(360px, calc(100vw - 16px)); }
+.gc-screen--durak-reference .gc-durak-game .gc-hand-count { position: relative; }
+.gc-screen--durak-reference .gc-durak-game .gc-opponent-heading { display: flex; flex-direction: column; align-items: center; position: relative; }
+.gc-screen--durak-reference .gc-durak-game .gc-opponent-avatar-wrap { position: relative; z-index: 2; display: block; flex: 0 0 auto; }
+.gc-screen--durak-reference .gc-durak-game .gc-opponent-avatar-wrap > img,
+.gc-screen--durak-reference .gc-durak-game .gc-opponent-avatar-wrap > i { width: 72px; height: 72px; display: grid; place-items: center; margin: 0 auto 3px; border: 2px solid #E04F5F; border-radius: 50%; object-fit: cover; background: #30252C; color: var(--text); box-shadow: 0 3px 9px rgba(0,0,0,.28); font-style: normal; font-weight: 800; }
+.gc-screen--durak-reference .gc-durak-game .gc-hand-count.is-current .gc-opponent-avatar-wrap > img,
+.gc-screen--durak-reference .gc-durak-game .gc-hand-count.is-current .gc-opponent-avatar-wrap > i { border-color: #72CDB7; }
+.gc-screen--durak-reference .gc-durak-game .gc-reaction-bubble { position: absolute; z-index: 20; top: 50%; left: calc(100% + 8px); display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; background: #29292a; box-shadow: 0 6px 18px rgba(0,0,0,.3); font-size: 23px; animation: gc-reaction-pop .18s ease-out both; }
+@keyframes gc-reaction-pop { from { opacity: 0; transform: translateY(calc(-50% + 8px)) scale(.65); } to { opacity: 1; transform: translateY(-50%) scale(1); } }
+
+/* The face-up trump sits horizontally beneath the stock, as in the supplied table reference. */
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-resource-row { position: relative; align-items: flex-start; overflow: visible; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-draw-pile { position: relative; z-index: 2; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-trump { position: absolute; z-index: 1; top: 30px; left: 3px; width: 54px; height: 42px; min-width: 0; padding: 0; display: block; overflow: visible; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-trump > .gc-playing-card { position: absolute; top: -7px; left: 2px; width: 52px !important; transform: rotate(90deg); transform-origin: 26px 26px; }
+
+
+/* Show the sender's own transient reaction at the local seat as well as to opponents. */
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game { position: relative; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-own-reaction {
+  position: absolute;
+  z-index: 30;
+  right: 12px;
+  bottom: calc(22dvh + 28px);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: min(75vw, 280px);
+  padding: 5px 8px 5px 5px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  color: #f4f4f4;
+  background: rgba(35,35,36,.96);
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  pointer-events: none;
+  animation: durak-own-reaction-in .18s ease-out both;
+}
+.gc-screen--durak-reference .gc-own-reaction > img,
+.gc-screen--durak-reference .gc-own-reaction > i {
+  width: 23px;
+  height: 23px;
+  display: grid;
+  flex: 0 0 23px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(79,213,198,.7);
+  border-radius: 50%;
+  color: white;
+  background: #29292a;
+  font-size: 11px;
+  font-style: normal;
+  object-fit: cover;
+}
+.gc-screen--durak-reference .gc-own-reaction > b { overflow: hidden; font-size: 11px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.gc-screen--durak-reference .gc-own-reaction-emoji { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; background: #29292a; font-size: 21px; }
+.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game.has-large-hand .gc-own-reaction { bottom: calc(19dvh + 24px); }
+@keyframes durak-own-reaction-in { from { opacity: 0; transform: translateY(6px) scale(.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .gc-screen--durak-reference .gc-own-reaction { animation: none !important; } }
+@media (max-width: 380px) {
+  .gc-screen--durak-reference .gc-durak-game .gc-opponent-avatar-wrap > img,
+  .gc-screen--durak-reference .gc-durak-game .gc-opponent-avatar-wrap > i { width: clamp(54px, 20vw, 68px); height: clamp(54px, 20vw, 68px); }
+}
+@media (max-height: 700px) {
+  .gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-reactions { bottom: calc(max(8px, env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px)) + 40dvh); }
+}

@@ -1,0 +1,21 @@
+# Terminal Full Output
+# Terminal: default-2
+# Command: rg -n 'spyChatWagers|spyChatWagerBank' drizzle/schema.ts; tail -n 8 drizzle/meta/_journal.json
+# PID: 64758
+# Timestamp: 2026-11-18_21-53-46.254152
+# Original Length: 1080 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mrg -n 'spyChatWagers|spyChatWagerBank' drizzle/schema.ts; tail -n 8 drizzle/meta/_journal.json
+[0m[32m197[0m:export const [0m[1m[31mspyChatWagers[0m = mysqlTable("spy_chat_wagers", {
+[0m[32m221[0m:export const [0m[1m[31mspyChatWagerBank[0m = mysqlTable("spy_chat_wager_bank", {
+[0m[32m229[0m:export const [0m[1m[31mspyChatWagerBank[0mLedger = mysqlTable("spy_chat_wager_bank_ledger", {
+    {"idx":1,"version":"5","when":1795003585848,"tag":"0001_nebulous_phalanx","breakpoints":true},
+    {"idx":2,"version":"5","when":1795004351776,"tag":"0002_talented_thunderbolt","breakpoints":true},
+    {"idx":3,"version":"5","when":1795010976152,"tag":"0003_curved_ink","breakpoints":true},
+    {"idx":4,"version":"5","when":1795026216308,"tag":"0004_slippery_mulholland_black","breakpoints":true},
+    {"idx":5,"version":"5","when":1795029022322,"tag":"0005_blackjack_bank","breakpoints":true},
+    {"idx":6,"version":"5","when":1795030000000,"tag":"0006_chat_wagers","breakpoints":true}
+  ]
+}
+[32mubuntu@sandbox:~/spyfallua$ [0m

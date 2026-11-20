@@ -1,0 +1,383 @@
+# Terminal Full Output
+# Terminal: spyfall
+# Command: pnpm check
+# PID: 1151
+# Timestamp: 2026-11-18_11-57-24.083511
+# Original Length: 44534 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mpnpm check
+> spyfallua@1.0.0 check /home/ubuntu/spyfallua
+> tsc --noEmit
+[96mserver/_core/context.ts[0m:[93m2[0m:[93m15[0m - [91merror[0m[90m TS2724: [0m'"../../drizzle/schema"' has no exported member named 'User'. Did you mean 'users'?
+[7m2[0m import type { User } from "../../drizzle/schema";
+[7m [0m [91m              ~~~~
+[0m  [96mdrizzle/schema.ts[0m:[93m3[0m:[93m14
+[0m    [7m3[0m export const users = mysqlTable("users", {
+    [7m [0m [96m             ~~~~~
+[0m    'users' is declared here.
+[96mserver/_core/sdk.ts[0m:[93m7[0m:[93m15[0m - [91merror[0m[90m TS2724: [0m'"../../drizzle/schema"' has no exported member named 'User'. Did you mean 'users'?
+[7m7[0m import type { User } from "../../drizzle/schema";
+[7m [0m [91m              ~~~~
+[0m  [96mdrizzle/schema.ts[0m:[93m3[0m:[93m14
+[0m    [7m3[0m export const users = mysqlTable("users", {
+    [7m [0m [96m             ~~~~~
+[0m    'users' is declared here.
+[96mserver/db.ts[0m:[93m3[0m:[93m10[0m - [91merror[0m[90m TS2305: [0mModule '"../drizzle/schema"' has no exported member 'InsertUser'.
+[7m3[0m import { InsertUser, users } from "../drizzle/schema";
+[7m [0m [91m         ~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m64[0m:[93m28[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m64[0m     const existing = await db.select({ id: spyLocations.id }).from(spyLocations).limit(1);
+[7m  [0m [91m                           ~~
+[0m[96mserver/game/routes.ts[0m:[93m66[0m:[93m13[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m66[0m       await db.insert(spyLocations).values(LOCATION_CATALOG).onDuplicateKeyUpdate({ set: { category: sql`VALUES(category)` } });
+[7m  [0m [91m            ~~
+[0m[96mserver/game/routes.ts[0m:[93m78[0m:[93m22[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m78[0m   const rows = await db.select().from(spyProfiles).where(eq(spyProfiles.telegramId, identity.id)).limit(1);
+[7m  [0m [91m                     ~~
+[0m[96mserver/game/routes.ts[0m:[93m81[0m:[93m11[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m81[0m     await db.update(spyProfiles).set({
+[7m  [0m [91m          ~~
+[0m[96mserver/game/routes.ts[0m:[93m98[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m98[0m   await db.insert(spyProfiles).values(profile);
+[7m  [0m [91m        ~~
+[0m[96mserver/game/routes.ts[0m:[93m182[0m:[93m15[0m - [91merror[0m[90m TS18048: [0m'me' is possibly 'undefined'.
+[7m182[0m     yourRole: me.role,
+[7m   [0m [91m              ~~
+[0m[96mserver/game/routes.ts[0m:[93m184[0m:[93m9[0m - [91merror[0m[90m TS18048: [0m'me' is possibly 'undefined'.
+[7m184[0m     ...(me.role === "spy" && !finished ? {} : { location: state.location, categories: state.category ? [state.category] : undefined }),
+[7m   [0m [91m        ~~
+[0m[96mserver/game/routes.ts[0m:[93m201[0m:[93m22[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m201[0m   const rows = await db.select().from(spyRooms).where(eq(spyRooms.code, normalized)).limit(1);
+[7m   [0m [91m                     ~~
+[0m[96mserver/game/routes.ts[0m:[93m211[0m:[93m11[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m211[0m     await db.update(spyRooms).set({ status: "voting", state: { ...state, status: "voting", votingEndsAt: Date.now() + VOTE_SECONDS * 1000, autoVoting: true, votes: {} } })
+[7m   [0m [91m          ~~
+[0m[96mserver/game/routes.ts[0m:[93m219[0m:[93m25[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | { ...; } | { ...; } | { ...; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m219[0m     return toPublicRoom(updated.room, updated.state, identityId);
+[7m   [0m [91m                        ~~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m278[0m:[93m10[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m278[0m   return db.transaction(async (tx: any) => {
+[7m   [0m [91m         ~~
+[0m[96mserver/game/routes.ts[0m:[93m282[0m:[93m31[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m282[0m     const current = readState(currentRoom);
+[7m   [0m [91m                              ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m295[0m:[93m87[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m295[0m         await tx.update(spyRooms).set({ status: "spy_guess", state: current, version: currentRoom.version + 1 }).where(eq(spyRooms.id, currentRoom.id));
+[7m   [0m [91m                                                                                      ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m295[0m:[93m136[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m295[0m         await tx.update(spyRooms).set({ status: "spy_guess", state: current, version: currentRoom.version + 1 }).where(eq(spyRooms.id, currentRoom.id));
+[7m   [0m [91m                                                                                                                                       ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m296[0m:[93m97[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m296[0m         return { room: { ...currentRoom, status: "spy_guess" as const, state: current, version: currentRoom.version + 1 }, state: current };
+[7m   [0m [91m                                                                                                ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m298[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m298[0m       await finishRound(tx, currentRoom, current, "spies", "Гравці більшістю помилково звинуватили мирного агента.");
+[7m   [0m [91m                            ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m299[0m:[93m94[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m299[0m       return { room: { ...currentRoom, status: "finished" as const, state: current, version: currentRoom.version + 1 }, state: current };
+[7m   [0m [91m                                                                                             ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m302[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m302[0m       await finishRound(tx, currentRoom, current, "spies", "Час сплив, а агенти не змогли більшістю викрити шпигуна.");
+[7m   [0m [91m                            ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m303[0m:[93m94[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m303[0m       return { room: { ...currentRoom, status: "finished" as const, state: current, version: currentRoom.version + 1 }, state: current };
+[7m   [0m [91m                                                                                             ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m309[0m:[93m81[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m309[0m     await tx.update(spyRooms).set({ status: "playing", state: current, version: currentRoom.version + 1 }).where(eq(spyRooms.id, currentRoom.id));
+[7m   [0m [91m                                                                                ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m309[0m:[93m130[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m309[0m     await tx.update(spyRooms).set({ status: "playing", state: current, version: currentRoom.version + 1 }).where(eq(spyRooms.id, currentRoom.id));
+[7m   [0m [91m                                                                                                                                 ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m310[0m:[93m91[0m - [91merror[0m[90m TS18048: [0m'currentRoom' is possibly 'undefined'.
+[7m310[0m     return { room: { ...currentRoom, status: "playing" as const, state: current, version: currentRoom.version + 1 }, state: current };
+[7m   [0m [91m                                                                                          ~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m316[0m:[93m10[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m316[0m   return db.transaction(async (tx: any) => {
+[7m   [0m [91m         ~~
+[0m[96mserver/game/routes.ts[0m:[93m320[0m:[93m36[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m320[0m     const state = await change(tx, room, readState(room));
+[7m   [0m [91m                                   ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m320[0m:[93m52[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m320[0m     const state = await change(tx, room, readState(room));
+[7m   [0m [91m                                                   ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m321[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m321[0m     if (state !== readState(room)) {
+[7m   [0m [91m                            ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m322[0m:[93m77[0m - [91merror[0m[90m TS18048: [0m'room' is possibly 'undefined'.
+[7m322[0m       await tx.update(spyRooms).set({ status: state.status, state, version: room.version + 1 }).where(eq(spyRooms.id, room.id));
+[7m   [0m [91m                                                                            ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m322[0m:[93m119[0m - [91merror[0m[90m TS18048: [0m'room' is possibly 'undefined'.
+[7m322[0m       await tx.update(spyRooms).set({ status: state.status, state, version: room.version + 1 }).where(eq(spyRooms.id, room.id));
+[7m   [0m [91m                                                                                                                      ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m324[0m:[93m68[0m - [91merror[0m[90m TS18048: [0m'room' is possibly 'undefined'.
+[7m324[0m     const fresh = { ...room, status: state.status, state, version: room.version + (state === readState(room) ? 0 : 1) } as SpyRoom;
+[7m   [0m [91m                                                                   ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m324[0m:[93m104[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m324[0m     const fresh = { ...room, status: state.status, state, version: room.version + (state === readState(room) ? 0 : 1) } as SpyRoom;
+[7m   [0m [91m                                                                                                       ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m357[0m:[93m5[0m - [91merror[0m[90m TS2322: [0mType 'unknown[]' is not assignable to type 'string[]'.
+  Type 'unknown' is not assignable to type 'string'.
+[7m357[0m     categories,
+[7m   [0m [91m    ~~~~~~~~~~
+[0m  [96mserver/game/routes.ts[0m:[93m40[0m:[93m3
+[0m    [7m40[0m   categories: string[];
+    [7m  [0m [96m  ~~~~~~~~~~
+[0m    The expected type comes from property 'categories' which is declared here on type 'RoomSettings'
+[96mserver/game/routes.ts[0m:[93m381[0m:[93m5[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m381[0m     db.select().from(spyProfiles).where(eq(spyProfiles.telegramId, user.id)).limit(1),
+[7m   [0m [91m    ~~
+[0m[96mserver/game/routes.ts[0m:[93m381[0m:[93m68[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m381[0m     db.select().from(spyProfiles).where(eq(spyProfiles.telegramId, user.id)).limit(1),
+[7m   [0m [91m                                                                   ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m382[0m:[93m5[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m382[0m     db.select({ id: spyRooms.id }).from(spyRooms).where(inArray(spyRooms.status, ["lobby", "playing", "voting", "spy_guess"])).limit(1),
+[7m   [0m [91m    ~~
+[0m[96mserver/game/routes.ts[0m:[93m383[0m:[93m5[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m383[0m     db.select({ id: spyLocations.id }).from(spyLocations).where(eq(spyLocations.active, true)),
+[7m   [0m [91m    ~~
+[0m[96mserver/game/routes.ts[0m:[93m385[0m:[93m80[0m - [91merror[0m[90m TS2345: [0mArgument of type 'GameIdentity | undefined' is not assignable to parameter of type 'GameIdentity'.
+  Type 'undefined' is not assignable to type 'GameIdentity'.
+[7m385[0m   return res.json({ player: profileView(rows[0] as ProfileRow), admin: isAdmin(user), preview: user.preview, categories: LOCATION_CATEGORIES, locationCount: locations.length, hasActiveRoom: active.length > 0 });
+[7m   [0m [91m                                                                               ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m385[0m:[93m96[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m385[0m   return res.json({ player: profileView(rows[0] as ProfileRow), admin: isAdmin(user), preview: user.preview, categories: LOCATION_CATEGORIES, locationCount: locations.length, hasActiveRoom: active.length > 0 });
+[7m   [0m [91m                                                                                               ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m391[0m:[93m25[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m391[0m     const rooms = await db.select().from(spyRooms).where(and(eq(spyRooms.isPrivate, false), eq(spyRooms.status, "lobby"))).orderBy(desc(spyRooms.createdAt)).limit(30);
+[7m   [0m [91m                        ~~
+[0m[96mserver/game/routes.ts[0m:[93m403[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m403[0m     const exists = await db.select({ id: spyRooms.id }).from(spyRooms).where(eq(spyRooms.code, code)).limit(1);
+[7m   [0m [91m                         ~~
+[0m[96mserver/game/routes.ts[0m:[93m407[0m:[93m32[0m - [91merror[0m[90m TS2345: [0mArgument of type 'GameIdentity | undefined' is not assignable to parameter of type 'GameIdentity'.
+  Type 'undefined' is not assignable to type 'GameIdentity'.
+[7m407[0m   const player = toPlayerState(user, true);
+[7m   [0m [91m                               ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m409[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m409[0m   await db.insert(spyRooms).values({ code, name: settings.name, ownerId: user.id, isPrivate: settings.isPrivate, maxPlayers: settings.maxPlayers, spyCount: settings.spyCount, durationMinutes: settings.durationMinutes, allowRejoin: settings.allowRejoin, categories: settings.categories, mode: settings.mode, status: "lobby", state, version: 1 });
+[7m   [0m [91m        ~~
+[0m[96mserver/game/routes.ts[0m:[93m409[0m:[93m74[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m409[0m   await db.insert(spyRooms).values({ code, name: settings.name, ownerId: user.id, isPrivate: settings.isPrivate, maxPlayers: settings.maxPlayers, spyCount: settings.spyCount, durationMinutes: settings.durationMinutes, allowRejoin: settings.allowRejoin, categories: settings.categories, mode: settings.mode, status: "lobby", state, version: 1 });
+[7m   [0m [91m                                                                         ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m411[0m:[93m65[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m411[0m   return res.status(201).json({ room: toPublicRoom(room, state, user.id), inviteCode: code });
+[7m   [0m [91m                                                                ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m418[0m:[93m51[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m418[0m   if (!state.players.some(player => player.id === user.id)) fail(403, "Приєднайтеся до кімнати, щоб переглянути гру.");
+[7m   [0m [91m                                                  ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m419[0m:[93m57[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m419[0m   return res.json({ room: await loadRoomView(room.code, user.id) });
+[7m   [0m [91m                                                        ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m425[0m:[93m65[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m425[0m     const existing = state.players.find(player => player.id === user.id);
+[7m   [0m [91m                                                                ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m433[0m:[93m38[0m - [91merror[0m[90m TS2345: [0mArgument of type 'GameIdentity | undefined' is not assignable to parameter of type 'GameIdentity'.
+  Type 'undefined' is not assignable to type 'GameIdentity'.
+[7m433[0m     state.players.push(toPlayerState(user));
+[7m   [0m [91m                                     ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m436[0m:[93m53[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m436[0m   return res.json({ room: toPublicRoom(room, state, user.id) });
+[7m   [0m [91m                                                    ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m443[0m:[93m41[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m443[0m     const member = requireMember(state, user.id);
+[7m   [0m [91m                                        ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m444[0m:[93m5[0m - [91merror[0m[90m TS18048: [0m'member' is possibly 'undefined'.
+[7m444[0m     member.ready = req.body?.ready !== false;
+[7m   [0m [91m    ~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m447[0m:[93m53[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m447[0m   return res.json({ room: toPublicRoom(room, state, user.id) });
+[7m   [0m [91m                                                    ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m454[0m:[93m24[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m454[0m   const result = await db.transaction(async (tx: any) => {
+[7m   [0m [91m                       ~~
+[0m[96mserver/game/routes.ts[0m:[93m458[0m:[93m17[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m458[0m     requireHost(room, user.id);
+[7m   [0m [91m                ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m458[0m:[93m23[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m458[0m     requireHost(room, user.id);
+[7m   [0m [91m                      ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m459[0m:[93m29[0m - [91merror[0m[90m TS2345: [0mArgument of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; } | undefined' is not assignable to parameter of type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+  Type 'undefined' is not assignable to type '{ id: number; code: string; name: string; status: "lobby" | "playing" | "voting" | "spy_guess" | "finished"; mode: string; version: number; state: Record<string, unknown>; createdAt: Date; ... 7 more ...; categories: string[]; }'.
+[7m459[0m     const state = readState(room);
+[7m   [0m [91m                            ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m462[0m:[93m271[0m - [91merror[0m[90m TS18048: [0m'room' is possibly 'undefined'.
+[7m462[0m     await tx.update(spyRooms).set({ name: settings.name, maxPlayers: settings.maxPlayers, spyCount: settings.spyCount, durationMinutes: settings.durationMinutes, allowRejoin: settings.allowRejoin, isPrivate: settings.isPrivate, categories: settings.categories, version: room.version + 1 }).where(eq(spyRooms.id, room.id));
+[7m   [0m [91m                                                                                                                                                                                                                                                                              ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m462[0m:[93m313[0m - [91merror[0m[90m TS18048: [0m'room' is possibly 'undefined'.
+[7m462[0m     await tx.update(spyRooms).set({ name: settings.name, maxPlayers: settings.maxPlayers, spyCount: settings.spyCount, durationMinutes: settings.durationMinutes, allowRejoin: settings.allowRejoin, isPrivate: settings.isPrivate, categories: settings.categories, version: room.version + 1 }).where(eq(spyRooms.id, room.id));
+[7m   [0m [91m                                                                                                                                                                                                                                                                                                                        ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m465[0m:[93m78[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m465[0m   return res.json({ room: toPublicRoom(result.room as SpyRoom, result.state, user.id) });
+[7m   [0m [91m                                                                             ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m471[0m:[93m23[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m471[0m     requireHost(room, user.id);
+[7m   [0m [91m                      ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m477[0m:[93m53[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m477[0m   return res.json({ room: toPublicRoom(room, state, user.id) });
+[7m   [0m [91m                                                    ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m483[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m483[0m   await db.transaction(async (tx: any) => {
+[7m   [0m [91m        ~~
+[0m[96mserver/game/routes.ts[0m:[93m489[0m:[93m68[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m489[0m       state.players = state.players.filter(player => player.id !== user.id);
+[7m   [0m [91m                                                                   ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m490[0m:[93m28[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m490[0m       if (room.ownerId === user.id) {
+[7m   [0m [91m                           ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m500[0m:[93m61[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m500[0m       const player = state.players.find(item => item.id === user.id);
+[7m   [0m [91m                                                            ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m516[0m:[93m27[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m516[0m   const available = await db.select().from(spyLocations).where(and(eq(spyLocations.active, true), inArray(spyLocations.category, categories)));
+[7m   [0m [91m                          ~~
+[0m[96mserver/game/routes.ts[0m:[93m520[0m:[93m29[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m520[0m     requireHost(lockedRoom, user.id);
+[7m   [0m [91m                            ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m532[0m:[93m56[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m532[0m   return res.json({ room: toPublicRoom(updated, state, user.id) });
+[7m   [0m [91m                                                       ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m541[0m:[93m39[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m541[0m     const from = requireMember(state, user.id);
+[7m   [0m [91m                                      ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m543[0m:[93m26[0m - [91merror[0m[90m TS18048: [0m'from' is possibly 'undefined'.
+[7m543[0m     if (!to || to.id === from.id) fail(400, "Оберіть іншого гравця.");
+[7m   [0m [91m                         ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m544[0m:[93m52[0m - [91merror[0m[90m TS18048: [0m'from' is possibly 'undefined'.
+[7m544[0m     state.questions.push({ id: randomUUID(), from: from.id, fromName: from.firstName, to: to.id, toName: to.firstName, text, createdAt: Date.now() });
+[7m   [0m [91m                                                   ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m544[0m:[93m71[0m - [91merror[0m[90m TS18048: [0m'from' is possibly 'undefined'.
+[7m544[0m     state.questions.push({ id: randomUUID(), from: from.id, fromName: from.firstName, to: to.id, toName: to.firstName, text, createdAt: Date.now() });
+[7m   [0m [91m                                                                      ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m544[0m:[93m91[0m - [91merror[0m[90m TS18048: [0m'to' is possibly 'undefined'.
+[7m544[0m     state.questions.push({ id: randomUUID(), from: from.id, fromName: from.firstName, to: to.id, toName: to.firstName, text, createdAt: Date.now() });
+[7m   [0m [91m                                                                                          ~~
+[0m[96mserver/game/routes.ts[0m:[93m544[0m:[93m106[0m - [91merror[0m[90m TS18048: [0m'to' is possibly 'undefined'.
+[7m544[0m     state.questions.push({ id: randomUUID(), from: from.id, fromName: from.firstName, to: to.id, toName: to.firstName, text, createdAt: Date.now() });
+[7m   [0m [91m                                                                                                         ~~
+[0m[96mserver/game/routes.ts[0m:[93m547[0m:[93m53[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m547[0m   return res.json({ room: toPublicRoom(room, state, user.id) });
+[7m   [0m [91m                                                    ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m556[0m:[93m41[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m556[0m     const member = requireMember(state, user.id);
+[7m   [0m [91m                                        ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m558[0m:[93m38[0m - [91merror[0m[90m TS18048: [0m'member' is possibly 'undefined'.
+[7m558[0m     if (!question || question.to !== member.id) fail(403, "Відповісти може лише адресат запитання.");
+[7m   [0m [91m                                     ~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m559[0m:[93m9[0m - [91merror[0m[90m TS18048: [0m'question' is possibly 'undefined'.
+[7m559[0m     if (question.answer) fail(409, "На це запитання вже відповіли.");
+[7m   [0m [91m        ~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m560[0m:[93m5[0m - [91merror[0m[90m TS18048: [0m'question' is possibly 'undefined'.
+[7m560[0m     question.answer = answer;
+[7m   [0m [91m    ~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m561[0m:[93m5[0m - [91merror[0m[90m TS18048: [0m'question' is possibly 'undefined'.
+[7m561[0m     question.answeredBy = member.id;
+[7m   [0m [91m    ~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m561[0m:[93m27[0m - [91merror[0m[90m TS18048: [0m'member' is possibly 'undefined'.
+[7m561[0m     question.answeredBy = member.id;
+[7m   [0m [91m                          ~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m564[0m:[93m53[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m564[0m   return res.json({ room: toPublicRoom(room, state, user.id) });
+[7m   [0m [91m                                                    ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m570[0m:[93m26[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m570[0m     requireMember(state, user.id);
+[7m   [0m [91m                         ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m578[0m:[93m53[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m578[0m   return res.json({ room: toPublicRoom(room, state, user.id) });
+[7m   [0m [91m                                                    ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m585[0m:[93m26[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m585[0m     requireMember(state, user.id);
+[7m   [0m [91m                         ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m588[0m:[93m36[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m588[0m     if (Object.hasOwn(state.votes, user.id)) fail(409, "Ваш голос уже враховано.");
+[7m   [0m [91m                                   ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m589[0m:[93m79[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m589[0m     if (!state.players.some(player => player.id === targetId) || targetId === user.id) fail(400, "Оберіть іншого гравця.");
+[7m   [0m [91m                                                                              ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m590[0m:[93m17[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m590[0m     state.votes[user.id] = targetId;
+[7m   [0m [91m                ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m611[0m:[93m62[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m611[0m   return res.json({ room: toPublicRoom(fresh, outcome.state, user.id) });
+[7m   [0m [91m                                                             ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m619[0m:[93m41[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m619[0m     const player = requireMember(state, user.id);
+[7m   [0m [91m                                        ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m621[0m:[93m9[0m - [91merror[0m[90m TS18048: [0m'player' is possibly 'undefined'.
+[7m621[0m     if (player.role !== "spy" || player.id !== state.spyGuessTarget) fail(403, "Вгадати локацію може лише викритий шпигун.");
+[7m   [0m [91m        ~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m621[0m:[93m34[0m - [91merror[0m[90m TS18048: [0m'player' is possibly 'undefined'.
+[7m621[0m     if (player.role !== "spy" || player.id !== state.spyGuessTarget) fail(403, "Вгадати локацію може лише викритий шпигун.");
+[7m   [0m [91m                                 ~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m627[0m:[93m61[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m627[0m   return res.json({ room: toPublicRoom(fresh, result.state, user.id) });
+[7m   [0m [91m                                                            ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m637[0m:[93m25[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m637[0m     const games = await db.select().from(spyGames).where(gte(spyGames.createdAt, since)).orderBy(desc(spyGames.createdAt)).limit(2000);
+[7m   [0m [91m                        ~~
+[0m[96mserver/game/routes.ts[0m:[93m646[0m:[93m41[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m646[0m     const profiles = ids.length ? await db.select().from(spyProfiles).where(inArray(spyProfiles.telegramId, ids)) : [];
+[7m   [0m [91m                                        ~~
+[0m[96mserver/game/routes.ts[0m:[93m651[0m:[93m26[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m651[0m   const profiles = await db.select().from(spyProfiles).orderBy(desc(sortKey)).limit(50);
+[7m   [0m [91m                         ~~
+[0m[96mserver/game/routes.ts[0m:[93m657[0m:[93m25[0m - [91merror[0m[90m TS18048: [0m'user' is possibly 'undefined'.
+[7m657[0m   if (req.params.id !== user.id && !isAdmin(user)) fail(403, "Перегляд цього профілю недоступний.");
+[7m   [0m [91m                        ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m657[0m:[93m45[0m - [91merror[0m[90m TS2345: [0mArgument of type 'GameIdentity | undefined' is not assignable to parameter of type 'GameIdentity'.
+  Type 'undefined' is not assignable to type 'GameIdentity'.
+[7m657[0m   if (req.params.id !== user.id && !isAdmin(user)) fail(403, "Перегляд цього профілю недоступний.");
+[7m   [0m [91m                                            ~~~~
+[0m[96mserver/game/routes.ts[0m:[93m659[0m:[93m22[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m659[0m   const rows = await db.select().from(spyProfiles).where(eq(spyProfiles.telegramId, req.params.id)).limit(1);
+[7m   [0m [91m                     ~~
+[0m[96mserver/game/routes.ts[0m:[93m665[0m:[93m16[0m - [91merror[0m[90m TS2345: [0mArgument of type 'GameIdentity | undefined' is not assignable to parameter of type 'GameIdentity'.
+  Type 'undefined' is not assignable to type 'GameIdentity'.
+[7m665[0m   if (!isAdmin(identity(req))) fail(403, "Панель доступна лише адміністраторам.");
+[7m   [0m [91m               ~~~~~~~~~~~~~
+[0m[96mserver/game/routes.ts[0m:[93m670[0m:[93m55[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m670[0m   const [profiles, rooms, games] = await Promise.all([db.select().from(spyProfiles), db.select().from(spyRooms), db.select().from(spyGames).orderBy(desc(spyGames.createdAt)).limit(10)]);
+[7m   [0m [91m                                                      ~~
+[0m[96mserver/game/routes.ts[0m:[93m670[0m:[93m86[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m670[0m   const [profiles, rooms, games] = await Promise.all([db.select().from(spyProfiles), db.select().from(spyRooms), db.select().from(spyGames).orderBy(desc(spyGames.createdAt)).limit(10)]);
+[7m   [0m [91m                                                                                     ~~
+[0m[96mserver/game/routes.ts[0m:[93m670[0m:[93m114[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m670[0m   const [profiles, rooms, games] = await Promise.all([db.select().from(spyProfiles), db.select().from(spyRooms), db.select().from(spyGames).orderBy(desc(spyGames.createdAt)).limit(10)]);
+[7m   [0m [91m                                                                                                                 ~~
+[0m[96mserver/game/routes.ts[0m:[93m671[0m:[93m134[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m671[0m   return res.json({ users: profiles.length, activeRooms: rooms.filter(room => room.status !== "finished").length, gamesPlayed: await db.select({ id: spyGames.roundId }).from(spyGames), latestGames: games.map(game => ({ ...game, participants: game.participants?.length ?? 0 })) });
+[7m   [0m [91m                                                                                                                                     ~~
+[0m[96mserver/game/routes.ts[0m:[93m675[0m:[93m27[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m675[0m   const locations = await db.select().from(spyLocations).orderBy(spyLocations.category, spyLocations.name);
+[7m   [0m [91m                          ~~
+[0m[96mserver/game/routes.ts[0m:[93m683[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m683[0m   await db.insert(spyLocations).values({ name, category, active: true });
+[7m   [0m [91m        ~~
+[0m[96mserver/game/routes.ts[0m:[93m690[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m690[0m   await db.update(spyLocations).set({ active: req.body?.active !== false }).where(eq(spyLocations.id, id));
+[7m   [0m [91m        ~~
+[0m[96mserver/game/routes.ts[0m:[93m697[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m697[0m   await db.delete(spyLocations).where(eq(spyLocations.id, id));
+[7m   [0m [91m        ~~
+[0m[96mserver/game/routes.ts[0m:[93m702[0m:[93m23[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m702[0m   const games = await db.select().from(spyGames).orderBy(desc(spyGames.createdAt)).limit(100);
+[7m   [0m [91m                      ~~
+[0m[96mserver/game/routes.ts[0m:[93m707[0m:[93m9[0m - [91merror[0m[90m TS18047: [0m'db' is possibly 'null'.
+[7m707[0m   await db.update(spyProfiles).set({ blocked: req.body?.blocked !== false }).where(eq(spyProfiles.telegramId, req.params.id));
+[7m   [0m [91m        ~~
+[0mFound 112 errors in 4 files.
+Errors  Files
+     1  server/_core/context.ts[90m:2
+[0m     1  server/_core/sdk.ts[90m:7
+[0m     1  server/db.ts[90m:3
+[0m   109  server/game/routes.ts[90m:64
+[0m[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 2.
+[32mubuntu@sandbox:~/spyfallua$ [0m

@@ -1,0 +1,271 @@
+# Terminal Full Output
+# Terminal: final-diff-core
+# Command: git diff -- README.md TODO.md plan.md client/src/components/game-center/DurakReference.css client/src/components/game-center/GameCenterScreen.tsx docs/telegram-setup.md drizzle/meta/_journal.json server/game/chatWagers.test.ts server/game/chatWagers.ts server/game/economy.test.ts server/game/economy.ts server/game/routes.ts server/game/telegramApi.ts server/game/telegramBot.ts > /tmp/final-spec-diff.txt && wc -l /tmp/final-spec-diff.txt && sed -n '1,260p' /tmp/final-spec-diff.txt
+# PID: 64758
+# Timestamp: 2026-11-19_18-12-45.525912
+# Original Length: 28423 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~$ [0mgit diff -- README.md TODO.md plan.md client/src/components/game-center/DurakReference.css client/src/components/game-center/GameCenterScreen.tsx docs/telegram-setup.md drizzle/meta/_journal.json server/game/chatWagers.test.ts server/game/chatWagers.ts server/game/economy.test.ts server/game/economy.ts server/game/routes.ts server/game/telegramApi.ts server/game/telegramBot.ts > /tmp/final-spec-diff.txt && wc -l /tmp/final-spec-diff.txt && sed -n '1,260p' /tmp/final-spec-diff.txt
+441 /tmp/final-spec-diff.txt
+[1mdiff --git a/README.md b/README.md
+[m[1mindex af2ed05..7833d4c 100644
+[m[1m--- a/README.md
+[m[1m+++ b/README.md
+[m[36m@@ -4,7 +4,7 @@
+[m 
+[m ## Production і запуск Telegram
+[m 
+[m[31m-Production Mini App: [spyfallua-lnp3wuwj.manus.space](https://spyfallua-lnp3wuwj.manus.space); бот — `@SecretAgentGame`. Після публікації або зміни webhook запустіть з кореня проєкту `node scripts/configure-telegram-bot.mjs`. Скрипт задає `message` і `callback_query`, не видаляє очікувані оновлення, виставляє українські меню команд і перевіряє відповідь `getWebhookInfo`. Потрібні `TELEGRAM_BOT_TOKEN` та `TELEGRAM_WEBAPP_URL` у захищеному середовищі; не передавайте секрети в командному рядку чи чаті. Деталі — у [налаштуванні Telegram](docs/telegram-setup.md).
+[m[32m+[m[32mProduction Mini App: [spyfallua-lnp3wuwj.manus.space](https://spyfallua-lnp3wuwj.manus.space); бот — `@SecretAgentGame`. Після публікації або зміни webhook запустіть з кореня проєкту `node scripts/configure-telegram-bot.mjs`. Скрипт задає `message`, `callback_query` і `pre_checkout_query`, не видаляє очікувані оновлення, виставляє українські меню команд і перевіряє відповідь `getWebhookInfo`. Потрібні `TELEGRAM_BOT_TOKEN` та `TELEGRAM_WEBAPP_URL` у захищеному середовищі; не передавайте секрети в командному рядку чи чаті. Деталі — у [налаштуванні Telegram](docs/telegram-setup.md).
+[m 
+[m ## Ігровий цикл у групі
+[m 
+[m[36m@@ -21,7 +21,7 @@[m [mProduction Mini App: [spyfallua-lnp3wuwj.manus.space](https://spyfallua-lnp3wuwj
+[m 
+[m ## Спільна економіка
+[m 
+[m[31m-Баланс один для Telegram-користувача в усіх групах та Mini App. `/zp` або точний текст `зп` дає 1–20 монет раз на дві години й показує їх з емодзі `🪙`; `/daily` — 20–100 монет раз на 24 години плюс обмежений бонус серії. Кожен переможець Telegram-групової гри гарантовано отримує 10 `🪙` за завершену партію — навіть якщо матч коротший за 3 хвилини або вичерпаний добовий ліміт; повторне нарахування того самого раунду заблоковане. Для інших режимів діють звичайні антифарм-умови: 5 монет за участь і ще 5 за перемогу, щонайменше 3 учасники й 3 хвилини, максимум 3 винагороджувані партії на гравця за UTC-добу.
+[m[32m+[m[32mБаланс один для Telegram-користувача в усіх групах та Mini App. `/zp` або точний текст `зп` дає фіксовані 100 `🪙` раз на дві години; `/daily` — фіксовані 50 `🪙` раз на 24 години. Активний VIP подвоює ці виплати. Кожен переможець Telegram-групової гри гарантовано отримує 10 `🪙` за завершену партію — навіть якщо матч коротший за 3 хвилини або вичерпаний добовий ліміт; повторне нарахування того самого раунду заблоковане. Для інших режимів діють звичайні антифарм-умови: 5 монет за участь і ще 5 за перемогу, щонайменше 3 учасники й 3 хвилини, максимум 3 винагороджувані партії на гравця за UTC-добу.
+[m 
+[m Магазин продає рамки аватарів, значки, титули, кольори імені, теми та інші косметичні предмети. Купівля, інвентар та екіпірування прив’язані до власного Telegram-профілю. Публічні рейтинги показують ім’я, аватар і баланс/статистику, але не повертають Telegram ID.
+[m 
+[m[1mdiff --git a/TODO.md b/TODO.md
+[m[1mindex c26a67c..06154e1 100644
+[m[1m--- a/TODO.md
+[m[1m+++ b/TODO.md
+[m[36m@@ -237,3 +237,15 @@[m [mTypeScript check і production build успішні; повний Vitest: 151 pa
+[m - Міграції `0007_economy_stars.sql` і `0008_wager_escrow.sql` застосовані через Drizzle; повторний `pnpm db:migrate` завершився успішно. Існуючі гаманці/історія не видалялися.
+[m - Після додавання WebSocket: `pnpm check` успішно; `pnpm test` — 170 passed, 1 skipped; `pnpm build` успішний (звичайне попередження про розмір JS-бандла).
+[m - Публікація й Telegram webhook setup виконуються після checkpoint; реальний платіж/списання не тестувалися.
+[m[32m+
+[m[32m+
+[m[32m+[m[32m### Повторний аудит і виправлення (2026-11-19 20:10)
+[m[32m+[m[32m- [x] Ліміт викликів тепер глобальний для автора, а не окремий за групою; створення серіалізоване блокуванням гаманця, доданий unit regression.
+[m[32m+[m[32m- [x] Зірковий pre-checkout більше не чекає профільну синхронізацію/загальну таблицю оновлень: webhook одразу підтверджує прийом, order-перевірка має 3.5-секундний бюджет, виклик `answerPreCheckoutQuery` обмежений 3 секундами й відхиляє неперевірене замовлення.
+[m[32m+[m[32m- [x] Адмін-корекції VIP-днів додають аудиторський рядок у ledger; додані тести обчислення grants/debits.
+[m[32m+[m[32m- [x] Dev-preview більше не обходить Telegram-ID allowlist у навігації та API адмін-панелі.
+[m[32m+[m[32m- [x] Автор реакції бачить тимчасову реакційну бульбашку біля власного аватара/імені; односекундний polling залишається fallback до WebSocket.
+[m[32m+[m[32m- [x] README й Telegram setup guide синхронізовані щодо `pre_checkout_query`, фіксованих винагород 100/50 та конфігурації `ADMIN_IDS`.
+[m[32m+[m[32m- [x] Додана адитивна міграція `0009_backfill_telegram_wallet_mirror.sql`; `pnpm db:migrate` завершився, `__drizzle_migrations` показує latest `1795033000000`, агрегат БД: 128/128 профілів зіставлені, 0 відсутніх і 0 розбіжностей монет/кристалів/VIP. Таблиця `spy_wallets` і ledger залишаються джерелом істини.
+[m[32m+[m[32m- [x] Після цих виправлень: `pnpm check` успішний; `pnpm test` — 173 passed, 1 skipped; `pnpm build` успішний (лише стандартне попередження про великий JS-бандл).
+[m[32m+[m[32m- [ ] Залишаються зовнішні кроки: checkpoint/push і підтвердження Auto Publish; оновлення фактичного Telegram webhook; перевірка реакцій та оплати Stars у production без реального платіжного списання.
+[m[1mdiff --git a/client/src/components/game-center/DurakReference.css b/client/src/components/game-center/DurakReference.css
+[m[1mindex e67f000..0d8ecf9 100644
+[m[1m--- a/client/src/components/game-center/DurakReference.css
+[m[1m+++ b/client/src/components/game-center/DurakReference.css
+[m[36m@@ -657,3 +657,46 @@
+[m .gc-screen--durak-reference .gc-table-screen--durak-live .gc-draw-pile { position: relative; z-index: 2; }
+[m .gc-screen--durak-reference .gc-table-screen--durak-live .gc-trump { position: absolute; z-index: 1; top: 30px; left: 3px; width: 54px; height: 42px; min-width: 0; padding: 0; display: block; overflow: visible; }
+[m .gc-screen--durak-reference .gc-table-screen--durak-live .gc-trump > .gc-playing-card { position: absolute; top: -7px; left: 2px; width: 52px !important; transform: rotate(90deg); transform-origin: 26px 26px; }
+[m[32m+
+[m[32m+
+[m[32m+[m[32m/* Show the sender's own transient reaction at the local seat as well as to opponents. */
+[m[32m+[m[32m.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game { position: relative; }
+[m[32m+[m[32m.gc-screen--durak-reference .gc-table-screen--durak-live .gc-own-reaction {
+[m[32m+[m[32m  position: absolute;
+[m[32m+[m[32m  z-index: 30;
+[m[32m+[m[32m  right: 12px;
+[m[32m+[m[32m  bottom: calc(22dvh + 28px);
+[m[32m+[m[32m  display: inline-flex;
+[m[32m+[m[32m  align-items: center;
+[m[32m+[m[32m  gap: 6px;
+[m[32m+[m[32m  max-width: min(75vw, 280px);
+[m[32m+[m[32m  padding: 5px 8px 5px 5px;
+[m[32m+[m[32m  border: 1px solid rgba(255,255,255,.12);
+[m[32m+[m[32m  border-radius: 999px;
+[m[32m+[m[32m  color: #f4f4f4;
+[m[32m+[m[32m  background: rgba(35,35,36,.96);
+[m[32m+[m[32m  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+[m[32m+[m[32m  pointer-events: none;
+[m[32m+[m[32m  animation: durak-own-reaction-in .18s ease-out both;
+[m[32m+[m[32m}
+[m[32m+[m[32m.gc-screen--durak-reference .gc-own-reaction > img,
+[m[32m+[m[32m.gc-screen--durak-reference .gc-own-reaction > i {
+[m[32m+[m[32m  width: 23px;
+[m[32m+[m[32m  height: 23px;
+[m[32m+[m[32m  display: grid;
+[m[32m+[m[32m  flex: 0 0 23px;
+[m[32m+[m[32m  place-items: center;
+[m[32m+[m[32m  overflow: hidden;
+[m[32m+[m[32m  border: 1px solid rgba(79,213,198,.7);
+[m[32m+[m[32m  border-radius: 50%;
+[m[32m+[m[32m  color: white;
+[m[32m+[m[32m  background: #29292a;
+[m[32m+[m[32m  font-size: 11px;
+[m[32m+[m[32m  font-style: normal;
+[m[32m+[m[32m  object-fit: cover;
+[m[32m+[m[32m}
+[m[32m+[m[32m.gc-screen--durak-reference .gc-own-reaction > b { overflow: hidden; font-size: 11px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+[m[32m+[m[32m.gc-screen--durak-reference .gc-own-reaction-emoji { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; background: #29292a; font-size: 21px; }
+[m[32m+[m[32m.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game.has-large-hand .gc-own-reaction { bottom: calc(19dvh + 24px); }
+[m[32m+[m[32m@keyframes durak-own-reaction-in { from { opacity: 0; transform: translateY(6px) scale(.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
+[m[32m+[m[32m@media (prefers-reduced-motion: reduce) { .gc-screen--durak-reference .gc-own-reaction { animation: none !important; } }
+[m[1mdiff --git a/client/src/components/game-center/GameCenterScreen.tsx b/client/src/components/game-center/GameCenterScreen.tsx
+[m[1mindex a45b0aa..ba8c216 100644
+[m[1m--- a/client/src/components/game-center/GameCenterScreen.tsx
+[m[1m+++ b/client/src/components/game-center/GameCenterScreen.tsx
+[m[36m@@ -1386,6 +1386,9 @@[m [mfunction GameProjection({
+[m     const isMyTurn = projection.turn === myPlayerId;
+[m     const activeTurnPlayer = players.find(player => player.id === projection.turn);
+[m     const activeTurnName = activeTurnPlayer?.nick || activeTurnPlayer?.name || "Гравець";
+[m[32m+[m[32m    const ownPlayer = players.find(player => player.id === myPlayerId);
+[m[32m+[m[32m    const ownPlayerName = ownPlayer?.nick || ownPlayer?.name || "Ви";
+[m[32m+[m[32m    const ownReaction = [...events].reverse().map(rec).find(event => event.type === "reaction" && event.playerId === myPlayerId && Date.now() - new Date(String(event.at || "")).getTime() < 4000);
+[m     const turnLabel = isMyTurn ? "Ваш хід" : `Ходить ♥ ${activeTurnName}`;
+[m     const turnMessage = isMyTurn
+[m       ? "Ваш хід · зіграйте карту або виконайте дію"
+[m[36m@@ -1550,6 +1553,11 @@[m [mfunction GameProjection({
+[m           <b>{turnSeconds === null || turnSeconds === undefined ? "Очікування" : `${turnSeconds} с`}</b>
+[m           <small>{turnMessage}</small>
+[m         </div>
+[m[32m+[m[32m        {ownReaction && <div className="gc-own-reaction" aria-live="polite" key={str(ownReaction.at, String(ownReaction.emoji))}>
+[m[32m+[m[32m          {ownPlayer?.avatarUrl ? <img src={ownPlayer.avatarUrl} alt="" /> : <i>{ownPlayerName.slice(0, 1)}</i>}
+[m[32m+[m[32m          <b>{ownPlayerName}</b>
+[m[32m+[m[32m          <span className="gc-own-reaction-emoji">{str(ownReaction.emoji)}</span>
+[m[32m+[m[32m        </div>}
+[m         <div className="gc-hand" ref={handRef} aria-label={`Ваша рука · ${hand.length} карт`}>
+[m           {handRows.map((row, rowIndex) => (
+[m             <div className="gc-hand-row" key={rowIndex} style={{ height: `${row.height}px` }}>
+[m[1mdiff --git a/docs/telegram-setup.md b/docs/telegram-setup.md
+[m[1mindex 8eb8ffb..e1233d4 100644
+[m[1m--- a/docs/telegram-setup.md
+[m[1m+++ b/docs/telegram-setup.md
+[m[36m@@ -15,8 +15,8 @@[m [mProduction Mini App доступний за `https://spyfallua-lnp3wuwj.manus.sp
+[m | `/stopgame` | Скасувати партію; доступно адміністратору групи | Група/супергрупа |
+[m | `/rules`, `/stats` | Пояснення правил і статистика групи | Група/супергрупа |
+[m | `/balance` | Показати глобальний баланс | Приватний чат і група |
+[m[31m-| `/zp` або точний текст `зп` | Отримати зарплату 1–20 монет раз на дві години; сума й баланс показуються з `🪙` | Приватний чат і група |
+[m[31m-| `/daily` | Отримати щоденний бонус 20–100 монет раз на 24 години | Приватний чат і група |
+[m[32m+[m[32m| `/zp` або точний текст `зп` | Отримати 100 `🪙` раз на дві години; активний VIP подвоює виплату | Приватний чат і група |
+[m[32m+[m[32m| `/daily` | Отримати 50 `🪙` раз на 24 години; активний VIP подвоює виплату | Приватний чат і група |
+[m | `/top` | Показати рейтинг монет | Приватний чат і група |
+[m | `/shop`, `/inventory` | Відкрити магазин/інвентар у Mini App | Приватний чат і група |
+[m 
+[m[36m@@ -54,13 +54,13 @@[m [mProduction Mini App доступний за `https://spyfallua-lnp3wuwj.manus.sp
+[m 
+[m ## Економіка й приватність
+[m 
+[m[31m-Баланс глобальний для профілю, а не окремий для кожної групи. `/zp` і `зп` — 1–20 монет раз на 2 години; `/daily` — 20–100 монет раз на 24 години, з обмеженим бонусом серії. Кожен переможець Telegram-групової гри гарантовано отримує 10 `🪙` за матч, незалежно від тривалості й добового ліміту; та сама гра не нараховується повторно. В інших режимах завершена гра може дати 5 монет за участь і +5 за перемогу, якщо в ній було щонайменше 3 гравці й вона тривала не менше 3 хвилин; межа — 3 винагороджувані матчі на гравця за UTC-добу. Купівля списує монети атомарно за серверною ціною; передача монет і азартні ставки не реалізовані.
+[m[32m+[m[32mБаланс глобальний для профілю, а не окремий для кожної групи. `/zp` і `зп` — фіксовані 100 монет раз на 2 години; `/daily` — 50 монет раз на 24 години. Активний VIP подвоює ці виплати. Кожен переможець Telegram-групової гри гарантовано отримує 10 `🪙` за матч, незалежно від тривалості й добового ліміту; та сама гра не нараховується повторно. В інших режимах завершена гра може дати 5 монет за участь і +5 за перемогу, якщо в ній було щонайменше 3 гравці й вона тривала не менше 3 хвилин; межа — 3 винагороджувані матчі на гравця за UTC-добу. Купівля списує монети атомарно за серверною ціною; передача монет і азартні ставки не реалізовані.
+[m 
+[m Рейтинг багатства показує місце, ім’я, аватар і баланс. Публічний API рейтингу не повертає Telegram ID. Власний ID відображається лише у власному профілі та закритій адмін-панелі.
+[m 
+[m ## Webhook і меню команд
+[m 
+[m[31m-Скрипт `node scripts/configure-telegram-bot.mjs` налаштовує `POST /api/telegram/webhook` із секретним токеном Telegram, `allowed_updates: ["message", "callback_query", "pre_checkout_query"]` та `drop_pending_updates: false`. Після встановлення він перевіряє через `getWebhookInfo` очікуваний URL і обидва типи оновлень, не очищаючи чергу.
+[m[32m+[m[32mСкрипт `node scripts/configure-telegram-bot.mjs` налаштовує `POST /api/telegram/webhook` із секретним токеном Telegram, `allowed_updates: ["message", "callback_query", "pre_checkout_query"]` та `drop_pending_updates: false`. Після встановлення він перевіряє через `getWebhookInfo` очікуваний URL і всі три типи оновлень, не очищаючи чергу.
+[m 
+[m Захищені секрети:
+[m 
+[m[36m@@ -72,11 +72,11 @@[m [mProduction Mini App доступний за `https://spyfallua-lnp3wuwj.manus.sp
+[m - `TELEGRAM_BOT_USERNAME` — username без `@`.
+[m - `TELEGRAM_WEBAPP_URL` — HTTPS URL опублікованого Mini App.
+[m - `TELEGRAM_APP_SHORT_NAME` — необов’язкове коротке ім’я Mini App.
+[m[31m-- `SPY_ADMIN_IDS` — ID адміністраторів Mini App, розділені комами.
+[m[32m+[m[32m- `ADMIN_IDS` — ID адміністраторів Mini App, розділені комами; `SPY_ADMIN_IDS` залишається сумісним fallback.
+[m 
+[m Запускайте `node scripts/configure-telegram-bot.mjs` з кореня проєкту після публікації. Скрипт читає захищене середовище (або `.env` через `dotenv/config`); потрібні `TELEGRAM_BOT_TOKEN` і `TELEGRAM_WEBAPP_URL`. Він встановлює приватне меню команд зі scope `default` та групове зі scope `all_group_chats`, мовою `uk`, і не друкує токен.
+[m 
+[m[31m-Після оновлення перевірте `getWebhookInfo`: очікуваний URL — `https://spyfallua-lnp3wuwj.manus.space/api/telegram/webhook`, типи — `message` і `callback_query`, кількість pending updates не повинна штучно скидатися. `GET /api/telegram/status` підтверджує лише локальну конфігурацію застосунку, а не фактичний стан Telegram.
+[m[32m+[m[32mПісля оновлення перевірте `getWebhookInfo`: очікуваний URL — `https://spyfallua-lnp3wuwj.manus.space/api/telegram/webhook`, типи — `message`, `callback_query` і `pre_checkout_query`, кількість pending updates не повинна штучно скидатися. `GET /api/telegram/status` підтверджує лише локальну конфігурацію застосунку, а не фактичний стан Telegram.
+[m 
+[m ## Перевірка
+[m 
+[m[1mdiff --git a/drizzle/meta/_journal.json b/drizzle/meta/_journal.json
+[m[1mindex 6f0a943..697c3ad 100644
+[m[1m--- a/drizzle/meta/_journal.json
+[m[1m+++ b/drizzle/meta/_journal.json
+[m[36m@@ -64,6 +64,13 @@
+[m       "when": 1795032000000,
+[m       "tag": "0008_wager_escrow",
+[m       "breakpoints": true
+[m[32m+[m[32m    },
+[m[32m+[m[32m    {
+[m[32m+[m[32m      "idx": 9,
+[m[32m+[m[32m      "version": "5",
+[m[32m+[m[32m      "when": 1795033000000,
+[m[32m+[m[32m      "tag": "0009_backfill_telegram_wallet_mirror",
+[m[32m+[m[32m      "breakpoints": true
+[m     }
+[m   ]
+[m }
+[m[1mdiff --git a/plan.md b/plan.md
+[m[1mindex 89aba10..6b343dd 100644
+[m[1m--- a/plan.md
+[m[1m+++ b/plan.md
+[m[36m@@ -288,3 +288,7 @@[m [mTelegram chat wager виклики зберігають власний `id` як
+[m - `server/game/arcade/durak.ts`, tableService/routes and game-center components: повністю вилучити transfer mode з UI/config/engine, підтримати 36/52 підкидні колоди, durable game_over→settlement→finished порядок, захищений WebSocket для семи реакцій, правильне розташування карт/козиря, lobby та currency icon.
+[m - `server/game/chatWagers.ts` and wager schema: per-challenge 5 active cap, 60-second expire and atomic refund/presentation update.
+[m - `client/src/components/game/AdminPanel.tsx` or a dedicated economy section plus protected server router: settings editing and manual grants with audit trail.
+[m[32m+
+[m[32m+
+[m[32m+[m[32m## Final TЗ audit follow-up (2026-11-19)
+[m[32m+[m[32mThe final targeted audit tightened the global five-challenge cap per Telegram creator (serialized by the wallet row), added a fast webhook acknowledgement and bounded Stars pre-checkout verification, recorded admin VIP-day grants/debits in the ledger, removed the development-preview admin bypass, and rendered each sender's own transient reaction. Migration 0009 backfills the users wallet mirror from authoritative `spy_wallets`; it was applied and verified at `1795033000000`, with 128/128 Telegram profiles mapped and zero coin/crystal/VIP mismatches while preserving the existing wallet and ledger history. TypeScript checks, all 173 unit tests (one shared-DB integration test skipped), and the production build passed. Auto Publish, actual Telegram webhook state, and live Mini App/WebSocket/Stars behavior still require external verification; no paid Stars transaction was made.
+[m[1mdiff --git a/server/game/chatWagers.test.ts b/server/game/chatWagers.test.ts
+[m[1mindex 71ee354..8bc2817 100644
+[m[1m--- a/server/game/chatWagers.test.ts
+[m[1m+++ b/server/game/chatWagers.test.ts
+[m[36m@@ -8,12 +8,19 @@[m [mimport {
+[m   mayDecline,
+[m   parseWager,
+[m   tiePolicy,
+[m[32m+[m[32m  MAX_ACTIVE_CHALLENGES_PER_CREATOR,
+[m[32m+[m[32m  wagerChallengeLimitReached,
+[m } from "./chatWagers";
+[m 
+[m describe("group wager rules", () => {
+[m   it("uses the exact challenge timeout notice", () => {
+[m     expect(WAGER_TIMEOUT_MESSAGE).toBe("⏳ Час виклику вийшов, гру скасовано");
+[m   });
+[m[32m+[m[32m  it("limits each creator to five concurrent challenges globally", () => {
+[m[32m+[m[32m    expect(MAX_ACTIVE_CHALLENGES_PER_CREATOR).toBe(5);
+[m[32m+[m[32m    expect(wagerChallengeLimitReached(4)).toBe(false);
+[m[32m+[m[32m    expect(wagerChallengeLimitReached(5)).toBe(true);
+[m[32m+[m[32m  });
+[m   it("parses exact Ukrainian ordinary-text wager phrases and stake limits", () => {
+[m     expect(parseWager("Зіграти в монетку 50 @agent_name")).toEqual({ game: "coin", stake: 50, username: "agent_name" });
+[m     expect(parseWager("Зіграти в кубики 10")).toEqual({ game: "dice", stake: 10 });
+[m[1mdiff --git a/server/game/chatWagers.ts b/server/game/chatWagers.ts
+[m[1mindex 67b0e41..ada8ed5 100644
+[m[1m--- a/server/game/chatWagers.ts
+[m[1m+++ b/server/game/chatWagers.ts
+[m[36m@@ -14,6 +14,10 @@[m [mimport { syncEconomyUserTx } from "./economy";
+[m 
+[m export type WagerGame = "coin" | "dice";
+[m export const WAGER_TIMEOUT_MESSAGE = "⏳ Час виклику вийшов, гру скасовано";
+[m[32m+[m[32mexport const MAX_ACTIVE_CHALLENGES_PER_CREATOR = 5;
+[m[32m+[m[32mexport function wagerChallengeLimitReached(activeCount: number) {
+[m[32m+[m[32m  return activeCount >= MAX_ACTIVE_CHALLENGES_PER_CREATOR;
+[m[32m+[m[32m}
+[m 
+[m export function parseWager(
+[m   text: string
+[m[36m@@ -256,14 +260,13 @@[m [mexport async function createWager(
+[m     .from(spyChatWagers)
+[m     .where(
+[m       and(
+[m[31m-        eq(spyChatWagers.chatId, String(message.chat.id)),
+[m         eq(spyChatWagers.challengerId, challengerId),
+[m         inArray(spyChatWagers.status, ["pending", "rolling"])
+[m       )
+[m     )
+[m[31m-    .limit(5);
+[m[31m-  if (active.length >= 5) {
+[m[31m-    await send(message.chat.id, "У вас уже є п’ять активних викликів у цій групі. Дочекайтеся їх завершення.");
+[m[32m+[m[32m    .limit(MAX_ACTIVE_CHALLENGES_PER_CREATOR);
+[m[32m+[m[32m  if (wagerChallengeLimitReached(active.length)) {
+[m[32m+[m[32m    await send(message.chat.id, "У вас уже є п’ять активних викликів. Дочекайтеся їх завершення.");
+[m     return;
+[m   }
+[m 
+[m[36m@@ -296,11 +299,10 @@[m [mexport async function createWager(
+[m       const wallet = walletRows[0];
+[m       if (!wallet || Number(wallet.balance) < parsed.stake) throw new Error("На балансі вже недостатньо монет для резервування ставки.");
+[m       const currentActive = await tx.select({ id: spyChatWagers.id }).from(spyChatWagers).where(and(
+[m[31m-        eq(spyChatWagers.chatId, String(message.chat.id)),
+[m         eq(spyChatWagers.challengerId, challengerId),
+[m         inArray(spyChatWagers.status, ["pending", "rolling"]),
+[m[31m-      )).limit(5);
+[m[31m-      if (currentActive.length >= 5) throw new Error("Досягнуто ліміт: не більше п’яти активних викликів.");
+[32mubuntu@sandbox:~/spyfallua$ [0m

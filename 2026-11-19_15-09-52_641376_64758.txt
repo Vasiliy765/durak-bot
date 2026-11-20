@@ -1,0 +1,63 @@
+# Terminal Full Output
+# Terminal: source-locators
+# Command: rg -n "className=.*gc-durak-table|gc-durak-table|Стіл вільний|очікуємо перший|Суперник ходить|підготуйте захист|gc-durak-hand|gc-screen--durak-reference" client/src/components/game-center/GameCenterScreen.tsx client/src/components/game-center/GameCenterScreen.css client/src/components/game-center/DurakReference.css | head -100
+# PID: 64758
+# Timestamp: 2026-11-19_15-09-52.641376
+# Original Length: 8450 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~$ [0mrg -n "className=.*gc-durak-table|gc-durak-table|Стіл вільний|очікуємо перший|Суперник ходить|підготуйте захист|gc-durak-hand|gc-screen--durak-reference" client/src/components/game-center/GameCenterScreen.tsx client/src/components/game-center/GameCenterScreen.css client/src/components/game-center/DurakReference.css | head -100
+client/src/components/game-center/GameCenterScreen.tsx:457:      <section className={`gc-screen${isDurakJourney ? " gc-screen--durak-reference" : ""}${isDurakJourney && !hasTelegramBackButton ? " gc-screen--durak-reference--fallback" : ""}${immersiveDurak ? " gc-screen--durak-live" : ""}${view === "catalog" && !pendingJoin ? " gc-screen--catalog" : ""}`}>
+client/src/components/game-center/GameCenterScreen.tsx:497:        <div className={`gc-durak-message gc-durak-table-message${error ? " is-error" : ""}`} role={error ? "alert" : "status"}>
+client/src/components/game-center/GameCenterScreen.tsx:1364:        : "Суперник ходить · підготуйте захист";
+client/src/components/game-center/GameCenterScreen.tsx:1474:        <div className="gc-durak-table" aria-label="Карти на столі">
+client/src/components/game-center/GameCenterScreen.tsx:1507:            <p className="gc-empty-table">Стіл вільний · очікуємо перший хід</p>
+client/src/components/game-center/GameCenterScreen.css:664:.gc-durak-table {
+client/src/components/game-center/GameCenterScreen.css:927:.gc-durak-table {
+client/src/components/game-center/GameCenterScreen.css:1437:.gc-durak-table {
+client/src/components/game-center/GameCenterScreen.css:1553:  .gc-durak-table { padding: 8px 4px; gap: 4px; }
+client/src/components/game-center/GameCenterScreen.css:1936:.gc-durak-table {
+client/src/components/game-center/GameCenterScreen.css:2194:.gc-durak-table { border: 1px solid rgba(114,205,183,.18); background: radial-gradient(ellipse at 50% 45%,#283D37 0%,#202F2B 58%,#1A2523 100%); box-shadow: inset 0 2px 14px rgba(0,0,0,.2),0 5px 14px rgba(0,0,0,.16); }
+client/src/components/game-center/DurakReference.css:14:.gc-screen--durak-reference {
+client/src/components/game-center/DurakReference.css:36:.gc-screen--durak-reference,
+client/src/components/game-center/DurakReference.css:37:.gc-screen--durak-reference * { box-sizing: border-box; }
+client/src/components/game-center/DurakReference.css:38:.gc-screen--durak-reference > .gc-head { display: none !important; }
+client/src/components/game-center/DurakReference.css:492:.gc-screen--durak-reference .gc-table-screen--durak {
+client/src/components/game-center/DurakReference.css:505:.gc-screen--durak-reference .gc-table-screen--durak-live {
+client/src/components/game-center/DurakReference.css:509:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-game-state {
+client/src/components/game-center/DurakReference.css:514:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-projection {
+client/src/components/game-center/DurakReference.css:520:.gc-screen--durak-reference .gc-table-screen--durak-live > .gc-table-meta { display: none !important; }
+client/src/components/game-center/DurakReference.css:521:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-game-state {
+client/src/components/game-center/DurakReference.css:530:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-game-state > h2,
+client/src/components/game-center/DurakReference.css:531:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-turn-banner,
+client/src/components/game-center/DurakReference.css:532:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-seats { display: none !important; }
+client/src/components/game-center/DurakReference.css:533:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-projection {
+client/src/components/game-center/DurakReference.css:541:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game {
+client/src/components/game-center/DurakReference.css:549:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-game.has-large-hand {
+client/src/components/game-center/DurakReference.css:553:.gc-screen--durak-reference .gc-durak-topbar { padding-right: 35px; grid-template-columns: 1.05fr .9fr 1.25fr; gap: 6px; }
+client/src/components/game-center/DurakReference.css:554:.gc-screen--durak-reference .gc-durak-chip { min-height: 36px; padding: 4px 7px; flex-direction: row; gap: 4px; border-color: rgba(255,255,255,.035); border-radius: 11px; background: rgba(36,36,37,.94); box-shadow: none; }
+client/src/components/game-center/DurakReference.css:555:.gc-screen--durak-reference .gc-durak-chip small { color: #a1a1a4; font-size: 11px; }
+client/src/components/game-center/DurakReference.css:556:.gc-screen--durak-reference .gc-durak-chip b { color: #efeff0; font-size: 12px; }
+client/src/components/game-center/DurakReference.css:557:.gc-screen--durak-reference .gc-durak-bank b { color: #f05a69; }
+client/src/components/game-center/DurakReference.css:558:.gc-screen--durak-reference .gc-durak-trump-chip b.is-red { color: #ff7380; }
+client/src/components/game-center/DurakReference.css:559:.gc-screen--durak-reference .gc-durak-game .gc-opponents { min-height: 0; align-content: center; }
+client/src/components/game-center/DurakReference.css:560:.gc-screen--durak-reference .gc-durak-resource-row { align-self: stretch; }
+client/src/components/game-center/DurakReference.css:561:.gc-screen--durak-reference .gc-durak-table { background: radial-gradient(ellipse at 50% 53%, rgba(91,17,27,.28), transparent 72%); }
+client/src/components/game-center/DurakReference.css:562:.gc-screen--durak-reference .gc-durak-game .gc-hand-card.selected { filter: drop-shadow(0 0 8px rgba(241,54,75,.78)); }
+client/src/components/game-center/DurakReference.css:563:.gc-screen--durak-reference .gc-durak-game .gc-legal-actions .gc-button { min-height: 40px; border-radius: 13px; }
+client/src/components/game-center/DurakReference.css:564:.gc-screen--durak-reference .gc-table-screen--durak:not(.gc-table-screen--durak-live) .gc-game-state { margin: 0; }
+client/src/components/game-center/DurakReference.css:565:.gc-screen--durak-reference .gc-table-screen--durak:not(.gc-table-screen--durak-live) .gc-card { border-color: rgba(255,255,255,.045); border-radius: 17px; background: #202021; color: var(--durak-text); }
+client/src/components/game-center/DurakReference.css:567:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-refresh { display: none !important; }
+client/src/components/game-center/DurakReference.css:570:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools {
+client/src/components/game-center/DurakReference.css:576:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools > summary {
+client/src/components/game-center/DurakReference.css:583:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-tools-panel {
+client/src/components/game-center/DurakReference.css:591:.gc-screen--durak-reference .gc-table-screen--durak-live .gc-live-refresh { display: flex; width: 100%; min-height: 38px; align-items: center; justify-content: center; gap: 7px; margin: 0 0 10px; }
+client/src/components/game-center/DurakReference.css:604:  .gc-screen--durak-reference .gc-table-screen--durak-live .gc-durak-topbar { padding-right: 32px; grid-template-columns: 1.05fr .88fr 1.22fr; gap: 4px; }
+client/src/components/game-center/DurakReference.css:605:  .gc-screen--durak-reference .gc-durak-chip { min-height: 34px; padding: 3px 5px; }
+client/src/components/game-center/DurakReference.css:606:  .gc-screen--durak-reference .gc-durak-chip b { font-size: 11px; }
+client/src/components/game-center/DurakReference.css:619:.gc-screen--durak-reference--fallback .gc-table-screen--durak-live .gc-durak-topbar { padding-left: 37px; }
+client/src/components/game-center/DurakReference.css:620:.gc-durak-table-message {
+client/src/components/game-center/DurakReference.css:630:.gc-screen--durak-reference .gc-table-screen--durak-result { padding: 0 !important; }
+client/src/components/game-center/DurakReference.css:631:.gc-screen--durak-reference .gc-table-screen--durak-result > .gc-table-meta { display: none !important; }
+client/src/components/game-center/DurakReference.css:633:  .gc-screen--durak-reference--fallback .gc-table-screen--durak-live .gc-durak-topbar { padding-left: 36px; }
+[32mubuntu@sandbox:~/spyfallua$ [0m

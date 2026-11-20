@@ -1,0 +1,27 @@
+# Terminal Full Output
+# Terminal: default-2
+# Command: set -e
+local_asset=$(grep -oE 'assets/index-[^" ]+\.js' dist/public/index.html | head -n1)
+remote_html=$(curl -fsS --max-time 20 https://spyfallua-lnp3wuwj.manus.space/)
+remote_asset=$(printf '%s' "$remote_html" | grep -oE 'assets/index-[^" ]+\.js' | head -n1 || true)
+printf 'Built asset: %s\nPublished asset: %s\n' "$local_asset" "${remote_asset:-not present}"
+if [ "$local_asset" = "$remote_asset" ]; then echo 'Published asset matches the tested checkpoint.'; else echo 'Checkpoint push succeeded; auto-publish is not yet confirmed at the public origin.'; fi
+printf 'Published health: '
+curl -fsS --max-time 20 https://spyfallua-lnp3wuwj.manus.space/api/health
+# PID: 64758
+# Timestamp: 2026-11-18_22-03-49.427454
+# Original Length: 902 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mset -e
+local_asset=$(grep -oE 'assets/index-[^" ]+\.js' dist/public/index.html | head -n1)
+remote_html=$(curl -fsS --max-time 20 https://spyfallua-lnp3wuwj.manus.space/)
+remote_asset=$(printf '%s' "$remote_html" | grep -oE 'assets/index-[^" ]+\.js' | head -n1 || true)
+printf 'Built asset: %s\nPublished asset: %s\n' "$local_asset" "${remote_asset:-not present}"
+if [ "$local_asset" = "$remote_asset" ]; then echo 'Published asset matches the tested checkpoint.'; else echo 'Checkpoint push succeeded; auto-publish is not yet confirmed at the public origin.'; fi
+printf 'Published health: '
+curl -fsS --max-time 20 https://spyfallua-lnp3wuwj.manus.space/api/health
+Built asset: assets/index-OJcgkgXZ.js
+Published asset: assets/index-Bq7TH116.js
+Checkpoint push succeeded; auto-publish is not yet confirmed at the public origin.
+[32mubuntu@sandbox:~/spyfallua$ [0m

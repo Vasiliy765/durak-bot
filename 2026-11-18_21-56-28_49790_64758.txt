@@ -1,0 +1,52 @@
+# Terminal Full Output
+# Terminal: default-2
+# Command: set -e
+pnpm db:migrate
+node --input-type=module <<'JS'
+import mysql from 'mysql2/promise';
+const db = await mysql.createConnection(process.env.DATABASE_URL);
+try {
+  const [tables] = await db.query(`SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name IN ('spy_chat_wagers','spy_chat_wager_bank','spy_chat_wager_bank_ledger') ORDER BY TABLE_NAME`);
+  const names = tables.map(x => x.TABLE_NAME);
+  const expected = ['spy_chat_wager_bank','spy_chat_wager_bank_ledger','spy_chat_wagers'];
+  if (JSON.stringify(names) !== JSON.stringify(expected)) throw new Error(`Unexpected wager tables: ${names.join(', ')}`);
+  const [columns] = await db.query(`SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name='spy_chat_wagers' AND column_name='failureCount'`);
+  if (columns.length !== 1) throw new Error('failureCount column is missing');
+  const [bankRows] = await db.query('SELECT balance FROM spy_chat_wager_bank WHERE id = 1');
+  if (bankRows.length !== 1 || Number(bankRows[0].balance) !== 0) throw new Error('Commission bank singleton was not seeded at zero');
+  console.log('Verified tables:', names.join(', '));
+  console.log('Verified failureCount column and singleton commission reserve at 0 coins.');
+} finally {
+  await db.end();
+}
+JS
+# PID: 64758
+# Timestamp: 2026-11-18_21-56-28.049790
+# Original Length: 1676 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mset -e
+pnpm db:migrate
+node --input-type=module <<'JS'
+import mysql from 'mysql2/promise';
+const db = await mysql.createConnection(process.env.DATABASE_URL);
+try {
+  const [tables] = await db.query(`SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name IN ('spy_chat_wagers','spy_chat_wager_bank','spy_chat_wager_bank_ledger') ORDER BY TABLE_NAME`);
+  const names = tables.map(x => x.TABLE_NAME);
+  const expected = ['spy_chat_wager_bank','spy_chat_wager_bank_ledger','spy_chat_wagers'];
+  if (JSON.stringify(names) !== JSON.stringify(expected)) throw new Error(`Unexpected wager tables: ${names.join(', ')}`);
+  const [columns] = await db.query(`SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema = DATABASE() AND table_name='spy_chat_wagers' AND column_name='failureCount'`);
+  if (columns.length !== 1) throw new Error('failureCount column is missing');
+  const [bankRows] = await db.query('SELECT balance FROM spy_chat_wager_bank WHERE id = 1');
+  if (bankRows.length !== 1 || Number(bankRows[0].balance) !== 0) throw new Error('Commission bank singleton was not seeded at zero');
+  console.log('Verified tables:', names.join(', '));
+  console.log('Verified failureCount column and singleton commission reserve at 0 coins.');
+} finally {
+  await db.end();
+}
+JS
+> spyfallua@1.0.0 db:migrate /home/ubuntu/spyfallua
+> drizzle-kit migrate
+[90mNo config path provided, using default 'drizzle.config.ts'
+[39m[90mReading config file '/home/ubuntu/spyfallua/drizzle.config.ts'
+[⣯] applying migrations...[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.

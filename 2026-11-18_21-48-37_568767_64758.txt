@@ -1,0 +1,22 @@
+# Terminal Full Output
+# Terminal: default-1
+# Command: python3 - <<'PY'
+from pathlib import Path
+for i,line in enumerate(Path('plan.md').read_text().splitlines(),1):
+ if 'BotFather' in line or line.startswith('Зберігаємо чинні Telegram ID'):
+  print(i, repr(line[:180]))
+PY
+# PID: 64758
+# Timestamp: 2026-11-18_21-48-37.568767
+# Original Length: 885 characters
+# ----------------------------------------
+
+[32mubuntu@sandbox:~/spyfallua$ [0mpython3 - <<'PY'
+from pathlib import Path
+for i,line in enumerate(Path('plan.md').read_text().splitlines(),1):
+ if 'BotFather' in line or line.startswith('Зберігаємо чинні Telegram ID'):
+  print(i, repr(line[:180]))
+PY
+84 'Зберігаємо чинні Telegram ID, `spy_profiles`, `spy_wallets`, `spy_economy_ledger`, Drizzle/MySQL і групову FSM «Шпигун». Blackjack залишається лише в історичних рядках/типах бази т'
+86 'Діагностика ТЗ: Durak зберігає ранги числом 11–14, а UI передавав число без перетворення, тому відображав неправильні номінали. Battleship уже має серверну перевірку розміщення й п'
+[32mubuntu@sandbox:~/spyfallua$ [0m
